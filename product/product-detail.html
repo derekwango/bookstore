@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details - GLOWING</title>
+    <title>Product Details - Lumina</title>
     <style>
         * {
             margin: 0;
@@ -12,55 +12,70 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             background-color: #f5f5f5;
             color: #333;
-            line-height: 1.6;
+            line-height: 1.5;
+        }
+
+        .promo-bar {
+            background-color: #5c4e6b;
+            color: white;
+            text-align: center;
+            padding: 0.75rem;
+            font-size: 0.9rem;
         }
 
         .header {
             background: white;
-            padding: 1rem 2rem;
+            padding: 1rem 0;
             border-bottom: 1px solid #e5e5e5;
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
 
         .header-content {
             max-width: 1400px;
             margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            letter-spacing: 1px;
+            font-size: 2rem;
+            font-weight: normal;
+            color: #333;
+            font-family: 'Times New Roman', Times, serif;
         }
 
         .nav-menu {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             align-items: center;
         }
 
-        .nav-menu a {
-            text-decoration: none;
+        .nav-item {
             color: #666;
-            font-size: 0.9rem;
+            text-decoration: none;
+            font-size: 0.95rem;
             font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
         }
 
-        .nav-menu a:hover {
+        .nav-item:hover {
             color: #333;
+        }
+
+        .nav-item.has-dropdown::after {
+            content: '';
+            margin-left: 0.5rem;
         }
 
         .header-icons {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             align-items: center;
         }
 
@@ -68,57 +83,43 @@
             width: 20px;
             height: 20px;
             cursor: pointer;
+            stroke: #666;
+        }
+
+        .icon:hover {
+            stroke: #333;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem 2rem;
             display: grid;
-            grid-template-columns: 1fr 1fr 300px;
-            gap: 3rem;
+            grid-template-columns: auto 1fr;
+            gap: 4rem;
         }
 
         .product-images {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .thumbnail-column {
             display: flex;
             flex-direction: column;
             gap: 1rem;
         }
 
-        .main-image {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            aspect-ratio: 4/3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .main-image img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .thumbnail-images {
-            display: flex;
-            gap: 1rem;
-        }
-
         .thumbnail {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 6px;
+            width: 70px;
+            height: 70px;
+            border: 1px solid #e5e5e5;
             cursor: pointer;
-            border: 2px solid transparent;
-            transition: border-color 0.2s;
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0.5rem;
+            position: relative;
         }
 
         .thumbnail.active {
@@ -126,123 +127,182 @@
         }
 
         .thumbnail img {
-            width: 100%;
-            height: 100%;
+            width: 90%;
+            height: 90%;
             object-fit: contain;
         }
 
-        .product-info {
+        .thumbnail-nav {
+            width: 70px;
+            height: 30px;
+            border: 1px solid #e5e5e5;
             background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            height: fit-content;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #666;
         }
 
-        .product-category {
-            font-size: 0.8rem;
+        .thumbnail-nav:hover {
+            background: #f8f8f8;
+        }
+
+        .main-image-container {
+            position: relative;
+            width: 500px;
+            height: 600px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border: 1px solid #e5e5e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .main-image img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+
+        .best-seller-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: white;
+            border: 1px solid #e5e5e5;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             color: #666;
+        }
+
+        .product-details {
+            max-width: 600px;
+        }
+
+        .brand-name {
+            color: #999;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 0.5rem;
         }
 
         .product-title {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #333;
+            font-size: 2.5rem;
+            color: #5c4e6b;
+            font-weight: normal;
             margin-bottom: 1rem;
+            line-height: 1.2;
+            font-family: 'Times New Roman', Times, serif;
         }
 
-        .delivery-info {
+        .rating {
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stars {
+            color: #4CAF50;
+            font-size: 1rem;
+        }
+
+        .review-count {
             color: #666;
             font-size: 0.9rem;
+        }
+
+        .price-section {
             margin-bottom: 2rem;
         }
 
-        .delivery-icon {
-            width: 16px;
-            height: 16px;
+        .current-price {
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: 500;
+            margin-right: 1rem;
         }
 
-        .section {
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #f0f0f0;
-            padding-bottom: 1.5rem;
+        .original-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 1rem;
+            margin-right: 0.5rem;
         }
 
-        .section:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
+        .discount {
+            background: #4CAF50;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 500;
         }
 
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            margin-bottom: 1rem;
-        }
-
-        .section-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .expand-icon {
-            width: 16px;
-            height: 16px;
-            transition: transform 0.2s;
-        }
-
-        .section.expanded .expand-icon {
-            transform: rotate(180deg);
-        }
-
-        .section-content {
+        .product-description {
             color: #666;
-            font-size: 0.95rem;
             line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
         }
 
-        .pricing {
-            display: flex;
-            gap: 2rem;
+        .size-selector {
             margin-bottom: 2rem;
         }
 
-        .price-option {
-            flex: 1;
-        }
-
-        .price-label {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 0.5rem;
-        }
-
-        .price {
-            font-size: 1.8rem;
-            font-weight: 600;
+        .size-label {
+            font-weight: 500;
+            margin-bottom: 1rem;
             color: #333;
         }
 
-        .quantity-selector {
+        .size-options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .size-option {
+            border: 1px solid #e5e5e5;
+            background: white;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #666;
+            transition: all 0.2s;
+        }
+
+        .size-option:hover {
+            border-color: #999;
+        }
+
+        .size-option.active {
+            background: #f0f5e8;
+            border-color: #4CAF50;
+            color: #333;
+        }
+
+        .quantity-section {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
         .quantity-control {
             display: flex;
             align-items: center;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            border: 1px solid #e5e5e5;
+            background: white;
         }
 
         .quantity-btn {
@@ -251,10 +311,15 @@
             border: none;
             background: none;
             cursor: pointer;
+            font-size: 1.2rem;
+            color: #666;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+        }
+
+        .quantity-btn:hover {
+            background: #f8f8f8;
         }
 
         .quantity-input {
@@ -262,109 +327,122 @@
             height: 40px;
             border: none;
             text-align: center;
-            font-weight: 500;
+            font-size: 1rem;
+            background: white;
+        }
+
+        .add-to-cart-btn {
+            background: #5c4e6b;
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-right: 1rem;
+        }
+
+        .add-to-cart-btn:hover {
+            background: #4a3f57;
         }
 
         .wishlist-btn {
-            background: none;
-            border: 1px solid #ddd;
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
+            border: 1px solid #e5e5e5;
+            background: white;
+            width: 50px;
+            height: 50px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .action-buttons {
+        .wishlist-btn:hover {
+            background: #f8f8f8;
+        }
+
+        .shipping-info {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 2rem 0;
+            color: #666;
+            font-size: 0.9rem;
         }
 
-        .btn {
-            flex: 1;
-            padding: 1rem;
-            border: none;
-            border-radius: 4px;
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+            padding: 2rem 0;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 0.5rem;
+        }
+
+        .feature-title {
+            font-size: 0.8rem;
+            color: #333;
+            margin-bottom: 0.25rem;
             font-weight: 500;
+        }
+
+        .feature-subtitle {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .detail-section {
+            border-top: 1px solid #e5e5e5;
+            margin-top: 2rem;
+            padding-top: 2rem;
+        }
+
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             cursor: pointer;
-            transition: all 0.2s;
+            padding: 1rem 0;
         }
 
-        .btn-primary {
-            background: white;
+        .detail-title {
+            font-size: 1.1rem;
             color: #333;
-            border: 1px solid #333;
+            font-weight: 500;
         }
 
-        .btn-primary:hover {
-            background: #f8f8f8;
+        .detail-toggle {
+            width: 20px;
+            height: 20px;
+            stroke: #666;
+            transition: transform 0.2s;
         }
 
-        .btn-secondary {
-            background: #333;
-            color: white;
+        .detail-section.expanded .detail-toggle {
+            transform: rotate(180deg);
         }
 
-        .btn-secondary:hover {
-            background: #222;
-        }
-
-        .sidebar {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            height: fit-content;
-        }
-
-        .sidebar-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .detail-content {
             color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .sidebar-content {
-            font-size: 0.9rem;
             line-height: 1.6;
-            color: #333;
-            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            display: none;
         }
 
-        .sidebar-highlight {
-            background: #f8f8f8;
-            padding: 1rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .specs-grid {
-            display: grid;
-            gap: 0.75rem;
-        }
-
-        .spec-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .spec-label {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .spec-value {
-            color: #333;
-            font-size: 0.9rem;
-            text-align: right;
+        .detail-section.expanded .detail-content {
+            display: block;
         }
 
         @media (max-width: 1200px) {
@@ -373,41 +451,90 @@
                 gap: 2rem;
             }
             
-            .nav-menu {
-                display: none;
+            .product-images {
+                justify-content: center;
             }
         }
 
         @media (max-width: 768px) {
+            .header-content {
+                padding: 0 1rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
             .container {
-                padding: 1rem;
+                padding: 2rem 1rem;
+            }
+            
+            .product-images {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .thumbnail-column {
+                flex-direction: row;
+                justify-content: center;
+                order: 2;
+            }
+            
+            .main-image-container {
+                width: 100%;
+                max-width: 400px;
+                height: 400px;
+                order: 1;
             }
             
             .product-title {
-                font-size: 1.5rem;
+                font-size: 2rem;
             }
             
-            .pricing {
-                flex-direction: column;
+            .features {
+                grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
             }
             
-            .action-buttons {
-                flex-direction: column;
+            .size-options {
+                flex-wrap: wrap;
+            }
+            
+            .quantity-section {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-title {
+                font-size: 1.8rem;
+            }
+            
+            .add-to-cart-btn {
+                padding: 0.8rem 2rem;
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="promo-bar">
+        Free domestic shipping on orders over $100
+    </div>
+
     <header class="header">
         <div class="header-content">
-            <div class="logo">GLOWING</div>
+            <div class="logo">Lumina</div>
             <nav class="nav-menu">
-                <a href="#">Latest Products</a>
-                <a href="#">Our Collection</a>
-                <a href="#">About us</a>
-                <a href="#">Customer Service</a>
-                <a href="#">Trending</a>
+                <a href="#" class="nav-item has-dropdown">SHOP</a>
+                <a href="#" class="nav-item has-dropdown">BRANDS</a>
+                <a href="#" class="nav-item">OFFERS</a>
+                <a href="#" class="nav-item">BLOG</a>
+                <a href="#" class="nav-item">ABOUT</a>
             </nav>
             <div class="header-icons">
                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -429,235 +556,67 @@
 
     <div class="container">
         <div class="product-images">
-            <div class="main-image">
-                <img id="mainImage" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDMwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjZjhmOWZhIiBzdHJva2U9IiNlMWU4ZWQiIHN0cm9rZS13aWR0aD0iMiIgcng9IjEwIi8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIzMCIgZmlsbD0iIzMzMzMzMyIgcng9IjUiLz4KPHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeD0iMjIwIiB5PSI4MCI+CjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjI4IiBmaWxsPSIjMjdhZTYwIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iNCIvPgo8cGF0aCBkPSJNMjAgMzBMMjYgMzZMMzggMjQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+CjxyZWN0IHg9IjUwIiB5PSIxNjAiIHdpZHRoPSIyMDAiIGhlaWdodD0iMTUiIGZpbGw9IiNlMWU4ZWQiIHJ4PSI1Ii8+CjxyZWN0IHg9IjUwIiB5PSIxODUiIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUiIGZpbGw9IiNlMWU4ZWQiIHJ4PSI1Ii8+CjxyZWN0IHg9IjUwIiB5PSIyMTAiIHdpZHRoPSIxODAiIGhlaWdodD0iMTUiIGZpbGw9IiNlMWU4ZWQiIHJ4PSI1Ii8+CjxyZWN0IHg9IjUwIiB5PSIyMzUiIHdpZHRoPSIxMjAiIGhlaWdodD0iMTUiIGZpbGw9IiNlMWU4ZWQiIHJ4PSI1Ii8+CjxyZWN0IHg9IjUwIiB5PSIyODAiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjUiIGZpbGw9IiMyN2FlNjAiIHJ4PSI1Ii8+CjxyZWN0IHg9IjUwIiB5PSIzMzAiIHdpZHRoPSI5MCIgaGVpZ2h0PSIzMCIgZmlsbD0iIzMzMzMzMyIgcng9IjUiLz4KPHJlY3QgeD0iMTUwIiB5PSIzMzAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMzAiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzMzMzMzMyIgc3Ryb2tlLXdpZHRoPSIyIiByeD0iNSIvPgo8L3N2Zz4=" alt="Product Image">
-            </div>
-            <div class="thumbnail-images">
+            <div class="thumbnail-column">
                 <div class="thumbnail active">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZjhmOWZhIiByeD0iNSIvPgo8cmVjdCB4PSIxMCIgeT0iMTAiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgZmlsbD0iIzMzMzMzMyIgcng9IjMiLz4KPC9zdmc+" alt="View 1">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZmZmIiBzdHJva2U9IiNlNWU1ZTUiLz4KPHJlY3QgeD0iMTAiIHk9IjE1IiB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIGZpbGw9IiNmZjk5YjIiLz4KPC9zdmc+" alt="View 1">
                 </div>
                 <div class="thumbnail">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZjhmOWZhIiByeD0iNSIvPgo8Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyMCIgZmlsbD0iIzY2N2VlYSIvPgo8L3N2Zz4=" alt="View 2">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZmZmIiBzdHJva2U9IiNlNWU1ZTUiLz4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMjAiIGZpbGw9IiNmZjk5YjIiLz4KPC9zdmc+" alt="View 2">
+                </div>
+                <div class="thumbnail">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZmZmIiBzdHJva2U9IiNlNWU1ZTUiLz4KPHBvbHlnb24gcG9pbnRzPSIzMCwxMCA1MCw0NSAxMCw0NSIgZmlsbD0iI2ZmOTliMiIvPgo8L3N2Zz4=" alt="View 3">
+                </div>
+                <div class="thumbnail">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZmZmIiBzdHJva2U9IiNlNWU1ZTUiLz4KPGVsbGlwc2UgY3g9IjMwIiBjeT0iMzAiIHJ4PSIyMCIgcnk9IjE1IiBmaWxsPSIjZmY5OWIyIi8+Cjwvc3ZnPg==" alt="View 4">
+                </div>
+                <div class="thumbnail">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZmZmIiBzdHJva2U9IiNlNWU1ZTUiLz4KPHJlY3QgeD0iMTUiIHk9IjIwIiB3aWR0aD0iMzAiIGhlaWdodD0iMjAiIGZpbGw9IiNmZjk5YjIiLz4KPC9zdmc+" alt="View 5">
+                </div>
+                <div class="thumbnail">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZmZmIiBzdHJva2U9IiNlNWU1ZTUiLz4KPHBhdGggZD0iTTMwIDEwIEw0NSAzMCBMMzAgNTAgTDE1IDMwIFoiIGZpbGw9IiNmZjk5YjIiLz4KPC9zdmc+" alt="View 6">
+                </div>
+                <div class="thumbnail-nav">↓</div>
+            </div>
+
+            <div class="main-image-container">
+                <div class="main-image">
+                    <div class="best-seller-badge">BEST SELLER</div>
+                    <img id="mainImage" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDMwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9InR1YmVHcmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmU2ZjAiLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZiM2Q0Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPCEtLSBNYWluIHR1YmUgLS0+CjxyZWN0IHg9IjgwIiB5PSIxMDAiIHdpZHRoPSIxNDAiIGhlaWdodD0iMjQwIiByeD0iNzAiIGZpbGw9InVybCgjdHViZUdyYWRpZW50KSIgc3Ryb2tlPSIjZmY5OWIyIiBzdHJva2Utd2lkdGg9IjIiLz4KPCEtLSBDYXAgLS0+CjxlbGxpcHNlIGN4PSIxNTAiIGN5PSI4NSIgcng9IjUwIiByeT0iMjAiIGZpbGw9IiNmZmMwZGMiIHN0cm9rZT0iI2ZmOTliMiIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxlbGxpcHNlIGN4PSIxNTAiIGN5PSI3NSIgcng9IjMwIiByeT0iMTIiIGZpbGw9IiNmZmFhYzgiLz4KPCEtLSBCcmFuZCBsYWJlbCAtLT4KPHJlY3QgeD0iMTAwIiB5PSIxNTAiIHdpZHRoPSIxMDAiIGhlaWdodD0iODAiIGZpbGw9IiNmZmY5ZmMiIHN0cm9rZT0iI2ZmOTliMiIgc3Ryb2tlLXdpZHRoPSIxIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTc1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzMzOTU3IiBmb250LWZhbWlseT0ic2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSJib2xkIj5FVkVSWURBWTwvdGV4dD4KPHRleHQgeD0iMTUwIiB5PSIxOTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3MzM5NTciIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiPkhVTUFOUzwvdGV4dD4KPHRleHQgeD0iMTUwIiB5PSIyMTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3MzM5NTciIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIxMiI+T2ggTXk8L3RleHQ+CjxyZWN0IHg9IjExMCIgeT0iMjYwIiB3aWR0aD0iODAiIGhlaWdodD0iNDAiIGZpbGw9IiNmZjY2OWMiLz4KPHR4dCB4PSIxNTAiIHk9IjI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9ImJvbGQiPlNQRjUwPC90ZXh0Pgo8dGV4dCB4PSIxNTAiIHk9IjI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSI4Ij5CT0RZPC90ZXh0Pgo8dGV4dCB4PSIxNTAiIHk9IjI5OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSI4Ij5TVU48L3RleHQ+CjwvN3ZnPgo=" alt="Oh My Bod! Sunscreen Lotion">
                 </div>
             </div>
         </div>
 
-        <div class="product-info">
-            <div class="product-category" id="productCategory">BOOK COLLECTION</div>
-            <h1 class="product-title" id="productTitle">The Great Gatsby</h1>
-            <div class="delivery-info">
-                <svg class="delivery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <rect x="1" y="3" width="15" height="13"></rect>
-                    <polygon points="16,8 20,8 23,11 23,16 16,16"></polygon>
-                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
-                </svg>
-                <span id="deliveryInfo">Delivery from 3 weeks</span>
+        <div class="product-details">
+            <div class="brand-name" id="brandName">EVERYDAY HUMANS</div>
+            <h1 class="product-title" id="productTitle">Oh My Bod! Sunscreen Lotion</h1>
+            
+            <div class="rating">
+                <div class="stars">★★★★★</div>
+                <span class="review-count" id="reviewCount">214 reviews</span>
             </div>
 
-            <div class="section expanded">
-                <div class="section-header" onclick="toggleSection(this)">
-                    <div class="section-title">Description</div>
-                    <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <polyline points="6,9 12,15 18,9"></polyline>
-                    </svg>
-                </div>
-                <div class="section-content" id="productDescription">
-                    Taking cues from mid-century designs at Soho House 40 Greek Street, our Theodore chair remains a House favourite. Handcrafted with a tapered, solid birch frame allows for a comfortable deep sit with down and feather-wrapped cushions, while brass detail arms add a vintage touch. Place in any corner of the home alongside the Theodore footstool to recreate our cosy reading nook seen around the Houses.
-                </div>
+            <div class="price-section">
+                <span class="current-price" id="currentPrice">$16.00</span>
+                <span class="original-price" id="originalPrice">$20.00</span>
+                <span class="discount">-20%</span>
             </div>
 
-            <div class="pricing">
-                <div class="price-option">
-                    <div class="price-label">Regular price</div>
-                    <div class="price" id="regularPrice">£995</div>
-                </div>
-                <div class="price-option">
-                    <div class="price-label">Member (Save £209 for £100 per year)</div>
-                    <div class="price" id="memberPrice">£846</div>
+            <div class="product-description" id="productDescription">
+                A reliable bodyguard for your skin, with secret uses. This lightweight, long lasting SPF50 sunscreen lotion will save you from the harshest midday sun, while also protecting dry skin, discoloured tattoos, darker scars, gel manicure UV exposures and more.
+            </div>
+
+            <div class="size-selector">
+                <div class="size-label">Size:</div>
+                <div class="size-options">
+                    <div class="size-option">50ml</div>
+                    <div class="size-option active">100ml</div>
                 </div>
             </div>
 
-            <div class="quantity-selector">
+            <div class="quantity-section">
                 <div class="quantity-control">
                     <button class="quantity-btn" onclick="changeQuantity(-1)">−</button>
                     <input type="number" class="quantity-input" value="1" id="quantity" min="1">
                     <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
                 </div>
-                <button class="wishlist-btn" onclick="toggleWishlist()">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="action-buttons">
-                <button class="btn btn-primary" onclick="addToCart()">Add to cart</button>
-                <button class="btn btn-secondary" onclick="buyNow()">Buy Now</button>
-            </div>
-
-            <div class="section">
-                <div class="section-header" onclick="toggleSection(this)">
-                    <div class="section-title">Dimensions</div>
-                    <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <polyline points="6,9 12,15 18,9"></polyline>
-                    </svg>
-                </div>
-                <div class="section-content" style="display: none;">
-                    <div class="specs-grid">
-                        <div class="spec-row">
-                            <div class="spec-label">Product dimensions:</div>
-                            <div class="spec-value">H84.5 x W64 x D75cm / H33.3 x W25.2 x D29.5"</div>
-                        </div>
-                        <div class="spec-row">
-                            <div class="spec-label">Product weight:</div>
-                            <div class="spec-value">15.6kg / 34.4lbs</div>
-                        </div>
-                        <div class="spec-row">
-                            <div class="spec-label">Packaged or boxed weight:</div>
-                            <div class="spec-value">23.6kg / 52lbs</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section">
-                <div class="section-header" onclick="toggleSection(this)">
-                    <div class="section-title">Author Details</div>
-                    <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <polyline points="6,9 12,15 18,9"></polyline>
-                    </svg>
-                </div>
-                <div class="section-content" style="display: none;" id="authorDetails">
-                    F. Scott Fitzgerald was an American novelist and short story writer whose works are the paradigmatic writings of the Jazz Age. He is widely regarded as one of the greatest American writers of the 20th century.
-                </div>
-            </div>
-
-            <div class="section">
-                <div class="section-header" onclick="toggleSection(this)">
-                    <div class="section-title">Publisher & Stock Info</div>
-                    <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <polyline points="6,9 12,15 18,9"></polyline>
-                    </svg>
-                </div>
-                <div class="section-content" style="display: none;">
-                    <div class="specs-grid">
-                        <div class="spec-row">
-                            <div class="spec-label">Publisher:</div>
-                            <div class="spec-value" id="publisher">Scribner</div>
-                        </div>
-                        <div class="spec-row">
-                            <div class="spec-label">Stock Quantity:</div>
-                            <div class="spec-value" id="stockQuantity">45 available</div>
-                        </div>
-                        <div class="spec-row">
-                            <div class="spec-label">ISBN:</div>
-                            <div class="spec-value">978-0-7432-7356-5</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="sidebar">
-            <div class="sidebar-title">Value Product</div>
-            <div class="sidebar-content" id="sidebarContent">
-                The Great Gatsby blends timeless comfort and modern elegance, elevating any room with its versatile, sleek design.
-            </div>
-            <div class="sidebar-highlight" id="sidebarHighlight">
-                Expertly crafted with premium materials, this book offers durability and unmatched literary experience. Elevate your reading space effortlessly with a piece that balances style and functionality.
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const products = {
-            'great-gatsby': {
-                category: 'BOOK COLLECTION',
-                title: 'The Great Gatsby',
-                author: 'F. Scott Fitzgerald',
-                regularPrice: '£29.99',
-                memberPrice: '£24.99',
-                publisher: 'Scribner',
-                stockQuantity: '45 available',
-                description: 'Set in the summer of 1922, The Great Gatsby follows narrator Nick Carraway\'s interactions with his mysterious neighbor Jay Gatsby and Gatsby\'s obsession with his former lover, Daisy Buchanan. A masterpiece of American literature, this novel captures the decadence and moral bankruptcy of the Jazz Age while exploring themes of love, idealism, resistance to change, social stratification, and excess.',
-                authorDetails: 'F. Scott Fitzgerald was an American novelist and short story writer whose works are the paradigmatic writings of the Jazz Age. He is widely regarded as one of the greatest American writers of the 20th century.',
-                sidebarContent: 'The Great Gatsby blends timeless storytelling and modern relevance, elevating any reader\'s experience with its versatile, powerful narrative.',
-                sidebarHighlight: 'Expertly crafted with premium literary techniques, this book offers depth and unmatched reading experience. Elevate your library effortlessly with a piece that balances classic style and contemporary insight.',
-                deliveryInfo: 'Delivery from 2-3 days'
-            },
-            'facial-cleanser': {
-                category: 'SKINCARE COLLECTION',
-                title: 'Gentle Facial Cleanser',
-                author: 'by GLOWING Team',
-                regularPrice: '£39.00',
-                memberPrice: '£29.00',
-                publisher: 'GLOWING Beauty',
-                stockQuantity: '25 available',
-                description: 'A gentle yet effective facial cleanser that removes impurities while maintaining your skin\'s natural moisture barrier. Formulated with natural ingredients for all skin types, this cleanser provides a deep clean without stripping essential oils.',
-                authorDetails: 'Developed by GLOWING\'s expert skincare team with over 15 years of experience in cosmetic formulation and dermatological research.',
-                sidebarContent: 'The Gentle Facial Cleanser combines effective cleansing with skin protection, suitable for daily use on all skin types.',
-                sidebarHighlight: 'Expertly formulated with natural ingredients, this cleanser offers gentle yet thorough cleansing. Perfect for maintaining healthy, balanced skin as part of your daily routine.',
-                deliveryInfo: 'Delivery from 1-2 days'
-            }
-        };
-
-        let currentProduct = 'great-gatsby';
-
-        function loadProduct(productId) {
-            const product = products[productId];
-            if (!product) return;
-
-            currentProduct = productId;
-            
-            document.getElementById('productCategory').textContent = product.category;
-            document.getElementById('productTitle').textContent = product.title;
-            document.getElementById('regularPrice').textContent = product.regularPrice;
-            document.getElementById('memberPrice').textContent = product.memberPrice;
-            document.getElementById('publisher').textContent = product.publisher;
-            document.getElementById('stockQuantity').textContent = product.stockQuantity;
-            document.getElementById('productDescription').textContent = product.description;
-            document.getElementById('authorDetails').textContent = product.authorDetails;
-            document.getElementById('sidebarContent').textContent = product.sidebarContent;
-            document.getElementById('sidebarHighlight').textContent = product.sidebarHighlight;
-            document.getElementById('deliveryInfo').textContent = product.deliveryInfo;
-        }
-
-        function toggleSection(header) {
-            const section = header.parentElement;
-            const content = section.querySelector('.section-content');
-            const isExpanded = section.classList.contains('expanded');
-            
-            if (isExpanded) {
-                section.classList.remove('expanded');
-                content.style.display = 'none';
-            } else {
-                section.classList.add('expanded');
-                content.style.display = 'block';
-            }
-        }
-
-        function changeQuantity(delta) {
-            const input = document.getElementById('quantity');
-            const newValue = Math.max(1, parseInt(input.value) + delta);
-            input.value = newValue;
-        }
-
-        function toggleWishlist() {
-            const btn = event.target.closest('.wishlist-btn');
-            const svg = btn.querySelector('svg');
-            const isLiked = svg.style.fill === 'currentColor';
-            
-            if (isLiked) {
-                svg.style.fill = 'none';
-                console.log('Removed from wishlist');
-            } else {
-                svg.style.fill = 'currentColor';
-                console.log('Added to wishlist');
-            }
-        }
-
-        function addToCart() {
-            const quantity = document.getElementById('quantity').value;
-            console.log(`Added ${quantity} item(s) to cart`);
-            alert
+                <button class="add-to-cart-btn" onclick="addToCart()">ADD
