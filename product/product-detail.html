@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - GLOWING</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        .nav-menu a:hover {
+            color: #333;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr 300px;
+            gap: 3rem;
+        }
+
+        .product-images {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .main-image {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .main-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .thumbnail-images {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+        }
+
+        .thumbnail.active {
+            border-color: #333;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .product-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            height: fit-content;
+        }
+
+        .product-category {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .delivery-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .delivery-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 1.5rem;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .expand-icon {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.2s;
+        }
+
+        .section.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .section-content {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .pricing {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .price-option {
+            flex: 1;
+        }
+
+        .price-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            border: none;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .wishlist-btn {
+            background: none;
+            border: 1px solid #ddd;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #333;
+            border: 1px solid #333;
+        }
+
+        .btn-primary:hover {
+            background: #f8f8f8;
+        }
+
+        .btn-secondary {
+            background: #333;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #222;
+        }
+
+        .sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            height: fit-content;
+        }
+
+        .sidebar-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-content {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-highlight {
+            background: #f8f8f8;
+            padding: 1rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .specs-grid {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .spec-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .spec-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .spec-value {
+            color: #333;
+            font-size: 0.9rem;
+            text-align: right;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .product-title {
+                font-size: 1.5rem;
+            }
+            
+            .pricing {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">GLOWING</div>
+            <nav class="nav-menu">
+                <a href="#">Latest Products</a>
+                <a href="#">Our Collection</a>
+                <a href="#">About us</a>
+                <a href="#">Customer Service</a>
+                <a href="#">Trending</a>
+            </nav>
+            <div class="header-icons">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="m16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="product-images">
+            <div class="main-image">
+                <img id="mainImage" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDMwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjZjhmOWZhIiBzdHJva2U9IiNlMWU4ZWQiIHN0cm9rZS13aWR0aD0iMiIgcng9IjEwIi8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIzMCIgZmlsbD0iIzMzMzMzMyIgcng9IjUiLz4KPHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeD0iMjIwIiB5PSI4MCI+CjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjI4IiBmaWxsPSIjMjdhZTYwIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iNCIvPgo8cGF0aCBkPSJNMjAgMzBMMjYgMzZMMzggMjQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+CjxyZWN0IHg9IjUwIiB5PSIxNjAiIHdpZHRoPSIyMDAiIGhlaWdodD0iMTUiIGZpbGw9IiNlMWU4ZWQiIHJ4PSI1Ii8+CjxyZWN0IHg9IjUwIiB5PSIxODUiIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUiIGZpbGw9IiNlMWU4ZWQiIHJ4PSI1Ii8+CjxyZWN0IHg9IjUwIiB5PSIyMTAiIHdpZHRoPSIxODAiIGhlaWdodD0iMTUiIGZpbGw9IiNlMWU4ZWQiIHJ4PSI1Ii8+CjxyZWN0IHg9IjUwIiB5PSIyMzUiIHdpZHRoPSIxMjAiIGhlaWdodD0iMTUiIGZpbGw9IiNlMWU4ZWQiIHJ4PSI1Ii8+CjxyZWN0IHg9IjUwIiB5PSIyODAiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjUiIGZpbGw9IiMyN2FlNjAiIHJ4PSI1Ii8+CjxyZWN0IHg9IjUwIiB5PSIzMzAiIHdpZHRoPSI5MCIgaGVpZ2h0PSIzMCIgZmlsbD0iIzMzMzMzMyIgcng9IjUiLz4KPHJlY3QgeD0iMTUwIiB5PSIzMzAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMzAiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzMzMzMzMyIgc3Ryb2tlLXdpZHRoPSIyIiByeD0iNSIvPgo8L3N2Zz4=" alt="Product Image">
+            </div>
+            <div class="thumbnail-images">
+                <div class="thumbnail active">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZjhmOWZhIiByeD0iNSIvPgo8cmVjdCB4PSIxMCIgeT0iMTAiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgZmlsbD0iIzMzMzMzMyIgcng9IjMiLz4KPC9zdmc+" alt="View 1">
+                </div>
+                <div class="thumbnail">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZjhmOWZhIiByeD0iNSIvPgo8Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyMCIgZmlsbD0iIzY2N2VlYSIvPgo8L3N2Zz4=" alt="View 2">
+                </div>
+            </div>
+        </div>
+
+        <div class="product-info">
+            <div class="product-category" id="productCategory">BOOK COLLECTION</div>
+            <h1 class="product-title" id="productTitle">The Great Gatsby</h1>
+            <div class="delivery-info">
+                <svg class="delivery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <rect x="1" y="3" width="15" height="13"></rect>
+                    <polygon points="16,8 20,8 23,11 23,16 16,16"></polygon>
+                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+                <span id="deliveryInfo">Delivery from 3 weeks</span>
+            </div>
+
+            <div class="section expanded">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div class="section-title">Description</div>
+                    <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </div>
+                <div class="section-content" id="productDescription">
+                    Taking cues from mid-century designs at Soho House 40 Greek Street, our Theodore chair remains a House favourite. Handcrafted with a tapered, solid birch frame allows for a comfortable deep sit with down and feather-wrapped cushions, while brass detail arms add a vintage touch. Place in any corner of the home alongside the Theodore footstool to recreate our cosy reading nook seen around the Houses.
+                </div>
+            </div>
+
+            <div class="pricing">
+                <div class="price-option">
+                    <div class="price-label">Regular price</div>
+                    <div class="price" id="regularPrice">£995</div>
+                </div>
+                <div class="price-option">
+                    <div class="price-label">Member (Save £209 for £100 per year)</div>
+                    <div class="price" id="memberPrice">£846</div>
+                </div>
+            </div>
+
+            <div class="quantity-selector">
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="changeQuantity(-1)">−</button>
+                    <input type="number" class="quantity-input" value="1" id="quantity" min="1">
+                    <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+                </div>
+                <button class="wishlist-btn" onclick="toggleWishlist()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="addToCart()">Add to cart</button>
+                <button class="btn btn-secondary" onclick="buyNow()">Buy Now</button>
+            </div>
+
+            <div class="section">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div class="section-title">Dimensions</div>
+                    <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </div>
+                <div class="section-content" style="display: none;">
+                    <div class="specs-grid">
+                        <div class="spec-row">
+                            <div class="spec-label">Product dimensions:</div>
+                            <div class="spec-value">H84.5 x W64 x D75cm / H33.3 x W25.2 x D29.5"</div>
+                        </div>
+                        <div class="spec-row">
+                            <div class="spec-label">Product weight:</div>
+                            <div class="spec-value">15.6kg / 34.4lbs</div>
+                        </div>
+                        <div class="spec-row">
+                            <div class="spec-label">Packaged or boxed weight:</div>
+                            <div class="spec-value">23.6kg / 52lbs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div class="section-title">Author Details</div>
+                    <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </div>
+                <div class="section-content" style="display: none;" id="authorDetails">
+                    F. Scott Fitzgerald was an American novelist and short story writer whose works are the paradigmatic writings of the Jazz Age. He is widely regarded as one of the greatest American writers of the 20th century.
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div class="section-title">Publisher & Stock Info</div>
+                    <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </div>
+                <div class="section-content" style="display: none;">
+                    <div class="specs-grid">
+                        <div class="spec-row">
+                            <div class="spec-label">Publisher:</div>
+                            <div class="spec-value" id="publisher">Scribner</div>
+                        </div>
+                        <div class="spec-row">
+                            <div class="spec-label">Stock Quantity:</div>
+                            <div class="spec-value" id="stockQuantity">45 available</div>
+                        </div>
+                        <div class="spec-row">
+                            <div class="spec-label">ISBN:</div>
+                            <div class="spec-value">978-0-7432-7356-5</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="sidebar-title">Value Product</div>
+            <div class="sidebar-content" id="sidebarContent">
+                The Great Gatsby blends timeless comfort and modern elegance, elevating any room with its versatile, sleek design.
+            </div>
+            <div class="sidebar-highlight" id="sidebarHighlight">
+                Expertly crafted with premium materials, this book offers durability and unmatched literary experience. Elevate your reading space effortlessly with a piece that balances style and functionality.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const products = {
+            'great-gatsby': {
+                category: 'BOOK COLLECTION',
+                title: 'The Great Gatsby',
+                author: 'F. Scott Fitzgerald',
+                regularPrice: '£29.99',
+                memberPrice: '£24.99',
+                publisher: 'Scribner',
+                stockQuantity: '45 available',
+                description: 'Set in the summer of 1922, The Great Gatsby follows narrator Nick Carraway\'s interactions with his mysterious neighbor Jay Gatsby and Gatsby\'s obsession with his former lover, Daisy Buchanan. A masterpiece of American literature, this novel captures the decadence and moral bankruptcy of the Jazz Age while exploring themes of love, idealism, resistance to change, social stratification, and excess.',
+                authorDetails: 'F. Scott Fitzgerald was an American novelist and short story writer whose works are the paradigmatic writings of the Jazz Age. He is widely regarded as one of the greatest American writers of the 20th century.',
+                sidebarContent: 'The Great Gatsby blends timeless storytelling and modern relevance, elevating any reader\'s experience with its versatile, powerful narrative.',
+                sidebarHighlight: 'Expertly crafted with premium literary techniques, this book offers depth and unmatched reading experience. Elevate your library effortlessly with a piece that balances classic style and contemporary insight.',
+                deliveryInfo: 'Delivery from 2-3 days'
+            },
+            'facial-cleanser': {
+                category: 'SKINCARE COLLECTION',
+                title: 'Gentle Facial Cleanser',
+                author: 'by GLOWING Team',
+                regularPrice: '£39.00',
+                memberPrice: '£29.00',
+                publisher: 'GLOWING Beauty',
+                stockQuantity: '25 available',
+                description: 'A gentle yet effective facial cleanser that removes impurities while maintaining your skin\'s natural moisture barrier. Formulated with natural ingredients for all skin types, this cleanser provides a deep clean without stripping essential oils.',
+                authorDetails: 'Developed by GLOWING\'s expert skincare team with over 15 years of experience in cosmetic formulation and dermatological research.',
+                sidebarContent: 'The Gentle Facial Cleanser combines effective cleansing with skin protection, suitable for daily use on all skin types.',
+                sidebarHighlight: 'Expertly formulated with natural ingredients, this cleanser offers gentle yet thorough cleansing. Perfect for maintaining healthy, balanced skin as part of your daily routine.',
+                deliveryInfo: 'Delivery from 1-2 days'
+            }
+        };
+
+        let currentProduct = 'great-gatsby';
+
+        function loadProduct(productId) {
+            const product = products[productId];
+            if (!product) return;
+
+            currentProduct = productId;
+            
+            document.getElementById('productCategory').textContent = product.category;
+            document.getElementById('productTitle').textContent = product.title;
+            document.getElementById('regularPrice').textContent = product.regularPrice;
+            document.getElementById('memberPrice').textContent = product.memberPrice;
+            document.getElementById('publisher').textContent = product.publisher;
+            document.getElementById('stockQuantity').textContent = product.stockQuantity;
+            document.getElementById('productDescription').textContent = product.description;
+            document.getElementById('authorDetails').textContent = product.authorDetails;
+            document.getElementById('sidebarContent').textContent = product.sidebarContent;
+            document.getElementById('sidebarHighlight').textContent = product.sidebarHighlight;
+            document.getElementById('deliveryInfo').textContent = product.deliveryInfo;
+        }
+
+        function toggleSection(header) {
+            const section = header.parentElement;
+            const content = section.querySelector('.section-content');
+            const isExpanded = section.classList.contains('expanded');
+            
+            if (isExpanded) {
+                section.classList.remove('expanded');
+                content.style.display = 'none';
+            } else {
+                section.classList.add('expanded');
+                content.style.display = 'block';
+            }
+        }
+
+        function changeQuantity(delta) {
+            const input = document.getElementById('quantity');
+            const newValue = Math.max(1, parseInt(input.value) + delta);
+            input.value = newValue;
+        }
+
+        function toggleWishlist() {
+            const btn = event.target.closest('.wishlist-btn');
+            const svg = btn.querySelector('svg');
+            const isLiked = svg.style.fill === 'currentColor';
+            
+            if (isLiked) {
+                svg.style.fill = 'none';
+                console.log('Removed from wishlist');
+            } else {
+                svg.style.fill = 'currentColor';
+                console.log('Added to wishlist');
+            }
+        }
+
+        function addToCart() {
+            const quantity = document.getElementById('quantity').value;
+            console.log(`Added ${quantity} item(s) to cart`);
+            alert
