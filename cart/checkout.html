@@ -315,6 +315,28 @@
       </article>
     </main>
 
+    <nav class="bottom-nav">
+        <div class="bottom-nav-container">
+            <a href="#" class="bottom-nav-item" data-nav="profile">
+                <ion-icon name="person-outline" class="bottom-nav-icon"></ion-icon>
+                <span class="bottom-nav-label">Profile</span>
+            </a>
+            
+            <a href="#" class="bottom-nav-item cart">
+                <ion-icon name="bag-handle-outline" class="bottom-nav-icon"></ion-icon>
+                <span class="bottom-nav-label">Cart</span>
+                <div class="cart-badge">2</div>
+            </a>
+            
+            <a href="#" class="bottom-nav-item" data-nav="search">
+                <ion-icon name="search-outline" class="bottom-nav-icon"></ion-icon>
+                <span class="bottom-nav-label">Search</span>
+            </a>
+            
+        </div>
+    </nav>
+
+
     <footer class="footer" data-section>
       <div class="container">
         <div class="footer-top">
@@ -532,6 +554,35 @@
                 console.log('Processing payment...');
             });
         });
+
+        const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
+            bottomNavItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all items
+                    bottomNavItems.forEach(navItem => navItem.classList.remove('active'));
+                    
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    // Handle navigation actions
+                    const navType = this.getAttribute('data-nav');
+                    switch(navType) {
+                        case 'profile':
+                            console.log('Navigate to profile');
+                            break;
+                        case 'search':
+                            console.log('Open search');
+                            break;
+                        case 'settings':
+                            console.log('Navigate to settings');
+                            break;
+                        default:
+                            console.log('Navigation clicked:', navType || 'cart');
+                    }
+                });
+         });
     </script>
 </body>
 </html>
