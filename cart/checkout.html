@@ -156,8 +156,8 @@
       <div class="overlay" data-nav-toggler data-overlay></div>
     </div>
 
-    <main>
-      <article>
+    <!-- <main>
+      <article> -->
             <div class="kontainer">
                 <div class="main-content">
                     <!-- Checkout Form -->
@@ -312,8 +312,8 @@
                     </div>
                 </div>
             </div>
-      </article>
-    </main>
+      <!-- </article>
+    </main> -->
 
     <nav class="bottom-nav">
         <div class="bottom-nav-container">
@@ -335,6 +335,301 @@
             
         </div>
     </nav>
+
+    <!-- Mobile Cart Drawer -->
+<div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-overlay"></div>
+    <div class="cart-drawer-content">
+        <div class="cart-drawer-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-drawer-close" id="closeCartDrawer">
+                <ion-icon name="close-outline"></ion-icon>
+            </button>
+        </div>
+        <div class="cart-drawer-body">
+            <!-- This will be loaded from cart.html or populated dynamically -->
+            <div class="cart-item">
+                <img src="../assets/images/product-1.jpg" alt="Product" class="cart-item-image">
+                <div class="cart-item-details">
+                    <h4>DuoComfort Sofa Premium</h4>
+                    <p class="cart-item-price">$20.00</p>
+                    <div class="cart-item-quantity">
+                        <button class="qty-btn minus">-</button>
+                        <span>1</span>
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more cart items here -->
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-total">
+                <span>Total: $45.00</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+            <a href="cart.html" class="view-cart-btn">View Full Cart</a>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile Search Overlay -->
+<div class="search-overlay" id="searchOverlay">
+    <div class="search-overlay-content">
+        <div class="search-header">
+            <div class="search-input-container">
+                <ion-icon name="search-outline" class="search-input-icon"></ion-icon>
+                <input type="text" class="search-input" placeholder="Search products..." id="mobileSearchInput" autocomplete="off">
+                <button class="search-clear" id="clearSearch" style="display: none;">
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+            </div>
+            <button class="search-close" id="closeSearch">Cancel</button>
+        </div>
+        
+        <div class="search-suggestions" id="searchSuggestions">
+            <div class="search-section">
+                <h4 class="search-section-title">Popular Searches</h4>
+                <div class="search-tags">
+                    <span class="search-tag">Sofas</span>
+                    <span class="search-tag">Chairs</span>
+                    <span class="search-tag">Tables</span>
+                    <span class="search-tag">Desks</span>
+                    <span class="search-tag">Lighting</span>
+                </div>
+            </div>
+            
+            <div class="search-section">
+                <h4 class="search-section-title">Recent Searches</h4>
+                <div class="recent-searches">
+                    <div class="recent-search-item">
+                        <ion-icon name="time-outline"></ion-icon>
+                        <span>Modern sofa</span>
+                        <button class="remove-recent">
+                            <ion-icon name="close-outline"></ion-icon>
+                        </button>
+                    </div>
+                    <div class="recent-search-item">
+                        <ion-icon name="time-outline"></ion-icon>
+                        <span>Office chair</span>
+                        <button class="remove-recent">
+                            <ion-icon name="close-outline"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="search-results" id="searchResults" style="display: none;">
+            <!-- Dynamic search results will be populated here -->
+            <div class="search-result-item">
+                <img src="../assets/images/product-1.jpg" alt="Product" class="result-image">
+                <div class="result-details">
+                    <h4 class="result-title">DuoComfort Sofa Premium</h4>
+                    <p class="result-price">$20.00</p>
+                    <p class="result-category">Living Room</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Mobile Profile Overlay -->
+<div class="profile-overlay" id="profileOverlay">
+    <div class="profile-overlay-backdrop"></div>
+    <div class="profile-overlay-content">
+        
+        <!-- Logged Out State -->
+        <div class="profile-auth-section" id="authSection">
+            <div class="profile-header">
+                <div class="profile-header-content">
+                    <div class="profile-avatar-placeholder">
+                        <ion-icon name="person-outline"></ion-icon>
+                    </div>
+                    <h2 class="profile-title">Welcome to Furnest</h2>
+                    <p class="profile-subtitle">Sign in for a personalized experience</p>
+                </div>
+                <button class="profile-close" id="closeProfile">
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+            </div>
+            
+            <div class="auth-buttons">
+                <button class="auth-btn primary" id="signInBtn">
+                    <ion-icon name="log-in-outline"></ion-icon>
+                    Sign In
+                </button>
+                <button class="auth-btn secondary" id="signUpBtn">
+                    <ion-icon name="person-add-outline"></ion-icon>
+                    Create Account
+                </button>
+            </div>
+            
+            <div class="guest-options">
+                <h3 class="section-title">Continue as Guest</h3>
+                <div class="guest-links">
+                    <a href="#" class="guest-link">
+                        <ion-icon name="bag-handle-outline"></ion-icon>
+                        <span>Track Your Order</span>
+                        <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+                    </a>
+                    <a href="#" class="guest-link">
+                        <ion-icon name="help-circle-outline"></ion-icon>
+                        <span>Customer Support</span>
+                        <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+                    </a>
+                    <a href="#" class="guest-link">
+                        <ion-icon name="information-circle-outline"></ion-icon>
+                        <span>About Furnest</span>
+                        <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logged In State -->
+        <div class="profile-user-section" id="userSection" style="display: none;">
+            <div class="profile-header logged-in">
+                <div class="profile-header-content">
+                    <div class="profile-avatar">
+                        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2Ffondos-de-pantalla-black--256001560061646850%2F&psig=AOvVaw1EyOUkaqjlFGpyTkv4n_xC&ust=1754038276557000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCNiS5PXb5o4DFQAAAAAdAAAAABAL" alt="Profile" id="userAvatar">
+                        <div class="online-indicator"></div>
+                    </div>
+                    <div class="user-info">
+                        <h2 class="user-name" id="userName">John Doe</h2>
+                        <p class="user-email" id="userEmail">john.doe@email.com</p>
+                        <div class="user-badge">Premium Member</div>
+                    </div>
+                </div>
+                <button class="profile-close" id="closeProfileLoggedIn">
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+            </div>
+            
+            <!-- Notifications Section -->
+            <div class="notifications-section">
+                <div class="section-header">
+                    <h3 class="section-title">Notifications</h3>
+                    <div class="notification-badge">3</div>
+                </div>
+                <div class="notifications-list">
+                    <div class="notification-item unread">
+                        <div class="notification-icon delivery">
+                            <ion-icon name="cube-outline"></ion-icon>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-title">Order Shipped</p>
+                            <p class="notification-text">Your DuoComfort Sofa is on the way!</p>
+                            <span class="notification-time">2 hours ago</span>
+                        </div>
+                        <div class="unread-dot"></div>
+                    </div>
+                    
+                    <div class="notification-item unread">
+                        <div class="notification-icon offer">
+                            <ion-icon name="pricetag-outline"></ion-icon>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-title">Special Offer</p>
+                            <p class="notification-text">20% off all living room furniture</p>
+                            <span class="notification-time">1 day ago</span>
+                        </div>
+                        <div class="unread-dot"></div>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <div class="notification-icon info">
+                            <ion-icon name="checkmark-circle-outline"></ion-icon>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-title">Order Delivered</p>
+                            <p class="notification-text">Your IronOne Desk has been delivered</p>
+                            <span class="notification-time">3 days ago</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="view-all-notifications">View All Notifications</button>
+            </div>
+            
+            <!-- Profile Menu -->
+            <div class="profile-menu">
+                <h3 class="section-title">Account</h3>
+                <div class="menu-items">
+                    <a href="#" class="menu-item">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <span>Edit Profile</span>
+                        <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+                    </a>
+                    <a href="#" class="menu-item">
+                        <ion-icon name="bag-handle-outline"></ion-icon>
+                        <span>My Orders</span>
+                        <div class="menu-badge">2</div>
+                        <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+                    </a>
+                    <a href="#" class="menu-item">
+                        <ion-icon name="heart-outline"></ion-icon>
+                        <span>Wishlist</span>
+                        <div class="menu-badge">5</div>
+                        <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+                    </a>
+                    <a href="#" class="menu-item">
+                        <ion-icon name="location-outline"></ion-icon>
+                        <span>Addresses</span>
+                        <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+                    </a>
+                    <a href="#" class="menu-item">
+                        <ion-icon name="card-outline"></ion-icon>
+                        <span>Payment Methods</span>
+                        <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+                    </a>
+                    <a href="#" class="menu-item">
+                        <ion-icon name="settings-outline"></ion-icon>
+                        <span>Settings</span>
+                        <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+                    </a>
+                    <a href="#" class="menu-item">
+                        <ion-icon name="help-circle-outline"></ion-icon>
+                        <span>Help & Support</span>
+                        <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+                    </a>
+                </div>
+                
+                <button class="sign-out-btn" id="signOutBtn">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                    Sign Out
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Simple Auth Modal (for demo) -->
+<div class="auth-modal" id="authModal" style="display: none;">
+    <div class="auth-modal-content">
+        <div class="auth-modal-header">
+            <h3 id="authModalTitle">Sign In</h3>
+            <button class="auth-modal-close" id="closeAuthModal">
+                <ion-icon name="close-outline"></ion-icon>
+            </button>
+        </div>
+        <form class="auth-form" id="authForm">
+            <div class="form-group">
+                <input type="email" placeholder="Email address" required id="authEmail">
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" required id="authPassword">
+            </div>
+            <div class="form-group" id="nameGroup" style="display: none;">
+                <input type="text" placeholder="Full name" id="authName">
+            </div>
+            <button type="submit" class="auth-submit-btn" id="authSubmit">Sign In</button>
+        </form>
+        <div class="auth-switch">
+            <span id="authSwitchText">Don't have an account?</span>
+            <button class="auth-switch-btn" id="authSwitchBtn">Sign Up</button>
+        </div>
+    </div>
+</div>
 
 
     <footer class="footer" data-section>
