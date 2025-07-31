@@ -1049,7 +1049,7 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     padding: 24px 20px;
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    background: linear-gradient(135deg, #1a1842 0%, #3ad8ed 100%);
     color: white;
 }
 
@@ -1168,16 +1168,16 @@ body {
     justify-content: center;
     gap: 12px;
     padding: 16px 24px;
-    border-radius: 12px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
+    border-radius: 4px;
     border: none;
 }
 
 .auth-btn.primary {
-    background: #4f46e5;
+    background: #374151;
     color: white;
 }
 
@@ -1189,7 +1189,7 @@ body {
 .auth-btn.secondary {
     background: #f3f4f6;
     color: #374151;
-    border: 1px solid #e5e7eb;
+    border: 2px solid #a2a2a3;
 }
 
 .auth-btn.secondary:hover {
