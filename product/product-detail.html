@@ -16,18 +16,19 @@
             background-color: #faf9f7;
             color: #2c2c2c;
             line-height: 1.6;
+            font-size: clamp(14px, 2.5vw, 16px);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: clamp(20px, 5vw, 40px);
         }
 
         .product-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: clamp(30px, 8vw, 60px);
             align-items: start;
         }
 
@@ -39,6 +40,9 @@
         .main-image {
             width: 100%;
             max-width: 500px;
+            height: auto;
+            aspect-ratio: 5/6;
+            object-fit: cover;
             border-radius: 12px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             transition: transform 0.3s ease;
@@ -53,11 +57,29 @@
             gap: 12px;
             margin-top: 20px;
             justify-content: center;
+            overflow-x: auto;
+            padding: 5px 0;
+            scrollbar-width: thin;
+            scrollbar-color: #8b6f47 transparent;
+        }
+
+        .thumbnail-row::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .thumbnail-row::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .thumbnail-row::-webkit-scrollbar-thumb {
+            background-color: #8b6f47;
+            border-radius: 2px;
         }
 
         .thumbnail {
             width: 80px;
             height: 100px;
+            min-width: 80px;
             border-radius: 6px;
             cursor: pointer;
             border: 2px solid transparent;
@@ -76,28 +98,29 @@
         }
 
         .book-title {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             font-weight: 300;
             color: #2c2c2c;
             margin-bottom: 8px;
             letter-spacing: -0.02em;
+            line-height: 1.2;
         }
 
         .author {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             color: #8b6f47;
             margin-bottom: 4px;
             font-style: italic;
         }
 
         .publisher {
-            font-size: 0.95rem;
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
             color: #666;
             margin-bottom: 20px;
         }
 
         .price {
-            font-size: 2.2rem;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
             font-weight: 400;
             color: #2c2c2c;
             margin: 20px 0;
@@ -108,20 +131,21 @@
             align-items: center;
             gap: 8px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
         .stars {
             color: #ffd700;
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
         }
 
         .rating-text {
             color: #666;
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
         }
 
         .description {
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
             line-height: 1.8;
             color: #4a4a4a;
             margin: 25px 0;
@@ -133,6 +157,7 @@
             align-items: center;
             gap: 15px;
             margin: 30px 0;
+            flex-wrap: wrap;
         }
 
         .quantity-label {
@@ -151,12 +176,13 @@
         .quantity-btn {
             background: none;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: clamp(35px, 8vw, 40px);
+            height: clamp(35px, 8vw, 40px);
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             color: #666;
             transition: all 0.2s ease;
+            touch-action: manipulation;
         }
 
         .quantity-btn:hover {
@@ -166,10 +192,10 @@
 
         .quantity-input {
             border: none;
-            width: 60px;
-            height: 40px;
+            width: clamp(50px, 12vw, 60px);
+            height: clamp(35px, 8vw, 40px);
             text-align: center;
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
             background: transparent;
         }
 
@@ -180,16 +206,18 @@
         }
 
         .btn {
-            padding: 15px 30px;
+            padding: clamp(12px, 3vw, 15px) clamp(20px, 5vw, 30px);
             border: none;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             flex: 1;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            touch-action: manipulation;
+            min-height: 48px;
         }
 
         .btn-primary {
@@ -232,6 +260,9 @@
             cursor: pointer;
             font-weight: 500;
             color: #2c2c2c;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            min-height: 48px;
+            touch-action: manipulation;
         }
 
         .details-header:hover {
@@ -243,6 +274,7 @@
             color: #666;
             line-height: 1.7;
             display: none;
+            font-size: clamp(0.85rem, 2.2vw, 0.95rem);
         }
 
         .details-content.active {
@@ -251,7 +283,7 @@
 
         .toggle-icon {
             transition: transform 0.3s ease;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
         }
 
         .toggle-icon.rotated {
@@ -262,16 +294,20 @@
             display: flex;
             gap: 10px;
             margin: 20px 0;
+            flex-wrap: wrap;
         }
 
         .format-btn {
-            padding: 8px 16px;
+            padding: clamp(6px, 2vw, 8px) clamp(12px, 3vw, 16px);
             border: 2px solid #e0e0e0;
             background: white;
             border-radius: 6px;
             cursor: pointer;
             transition: all 0.2s ease;
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 2.2vw, 0.9rem);
+            touch-action: manipulation;
+            min-height: 36px;
+            white-space: nowrap;
         }
 
         .format-btn:hover,
@@ -281,36 +317,26 @@
             color: white;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px 15px;
+        /* Tablet styles */
+        @media (max-width: 1024px) {
+            .product-section {
+                gap: 40px;
             }
+            
+            .image-section {
+                position: static;
+            }
+        }
 
+        /* Mobile styles */
+        @media (max-width: 768px) {
             .product-section {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
 
             .image-section {
-                position: static;
                 order: 1;
-            }
-
-            .main-image {
-                max-width: 100%;
-                height: auto;
-            }
-
-            .thumbnail-row {
-                justify-content: center;
-                overflow-x: auto;
-                padding: 10px 0;
-            }
-
-            .thumbnail {
-                flex-shrink: 0;
-                width: 70px;
-                height: 85px;
             }
 
             .product-info {
@@ -318,147 +344,147 @@
                 padding: 10px 0;
             }
 
-            .book-title {
-                font-size: 1.8rem;
-                line-height: 1.2;
-                margin-bottom: 12px;
-            }
-
-            .author {
-                font-size: 1.1rem;
-                margin-bottom: 6px;
-            }
-
-            .publisher {
-                font-size: 0.9rem;
-                margin-bottom: 15px;
-            }
-
-            .price {
-                font-size: 1.8rem;
-                margin: 15px 0;
-            }
-
-            .rating {
-                flex-wrap: wrap;
-                gap: 5px;
-                margin-bottom: 15px;
-            }
-
-            .format-options {
-                flex-wrap: wrap;
-                gap: 8px;
-                margin: 15px 0;
-            }
-
-            .format-btn {
-                font-size: 0.85rem;
-                padding: 6px 12px;
-                min-width: 80px;
-            }
-
-            .description {
-                font-size: 0.95rem;
-                line-height: 1.6;
-                margin: 20px 0;
-                text-align: left;
-            }
-
             .quantity-section {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: stretch;
                 gap: 10px;
-                margin: 20px 0;
             }
 
             .quantity-controls {
-                align-self: stretch;
-                justify-content: center;
-            }
-
-            .quantity-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 1.3rem;
-            }
-
-            .quantity-input {
-                width: 80px;
-                height: 45px;
-                font-size: 1.1rem;
+                align-self: center;
             }
 
             .button-group {
                 flex-direction: column;
                 gap: 12px;
-                margin: 25px 0;
             }
 
-            .btn {
-                padding: 16px 20px;
-                font-size: 1rem;
-                border-radius: 6px;
+            .description {
+                text-align: left;
             }
 
-            .details-section {
-                margin-top: 30px;
-            }
-
-            .details-header {
-                padding: 12px 0;
-                font-size: 0.95rem;
-            }
-
-            .details-content {
-                font-size: 0.9rem;
-                line-height: 1.6;
-                padding-bottom: 12px;
+            .thumbnail {
+                width: 70px;
+                height: 85px;
+                min-width: 70px;
             }
         }
 
+        /* Small mobile styles */
         @media (max-width: 480px) {
             .container {
                 padding: 15px 10px;
             }
 
-            .book-title {
-                font-size: 1.6rem;
-            }
-
-            .author {
-                font-size: 1rem;
-            }
-
-            .price {
-                font-size: 1.6rem;
-            }
-
-            .stars {
-                font-size: 1rem;
-            }
-
-            .rating-text {
-                font-size: 0.8rem;
-            }
-
-            .format-btn {
-                font-size: 0.8rem;
-                padding: 5px 10px;
-                min-width: 70px;
-            }
-
-            .description {
-                font-size: 0.9rem;
-            }
-
-            .btn {
-                padding: 14px 16px;
-                font-size: 0.95rem;
-            }
-
             .thumbnail {
                 width: 60px;
                 height: 75px;
+                min-width: 60px;
+            }
+
+            .format-options {
+                gap: 8px;
+            }
+
+            .format-btn {
+                min-width: 70px;
+            }
+        }
+
+        /* Very small screens */
+        @media (max-width: 320px) {
+            .format-options {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .format-btn {
+                text-align: center;
+            }
+        }
+
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .main-image,
+            .thumbnail {
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+            }
+        }
+
+        /* Focus styles for accessibility */
+        .btn:focus,
+        .format-btn:focus,
+        .quantity-btn:focus,
+        .details-header:focus {
+            outline: 2px solid #8b6f47;
+            outline-offset: 2px;
+        }
+
+        /* Reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a;
+                color: #e0e0e0;
+            }
+
+            .container {
+                background-color: #1a1a1a;
+            }
+
+            .book-title {
+                color: #ffffff;
+            }
+
+            .author {
+                color: #d4a574;
+            }
+
+            .publisher,
+            .rating-text {
+                color: #b0b0b0;
+            }
+
+            .price {
+                color: #ffffff;
+            }
+
+            .description {
+                color: #c0c0c0;
+            }
+
+            .quantity-controls {
+                background: #2a2a2a;
+                border-color: #404040;
+            }
+
+            .format-btn {
+                background: #2a2a2a;
+                border-color: #404040;
+                color: #e0e0e0;
+            }
+
+            .details-item {
+                border-bottom-color: #404040;
+            }
+
+            .details-header {
+                color: #ffffff;
+            }
+
+            .details-content {
+                color: #b0b0b0;
             }
         }
     </style>
@@ -516,7 +542,7 @@
 
                 <div class="details-section">
                     <div class="details-item">
-                        <div class="details-header" onclick="toggleDetails(this)">
+                        <div class="details-header" onclick="toggleDetails(this)" tabindex="0" role="button" aria-expanded="false">
                             <span>Book Details</span>
                             <span class="toggle-icon">+</span>
                         </div>
@@ -531,7 +557,7 @@
                     </div>
 
                     <div class="details-item">
-                        <div class="details-header" onclick="toggleDetails(this)">
+                        <div class="details-header" onclick="toggleDetails(this)" tabindex="0" role="button" aria-expanded="false">
                             <span>About the Author</span>
                             <span class="toggle-icon">+</span>
                         </div>
@@ -541,7 +567,7 @@
                     </div>
 
                     <div class="details-item">
-                        <div class="details-header" onclick="toggleDetails(this)">
+                        <div class="details-header" onclick="toggleDetails(this)" tabindex="0" role="button" aria-expanded="false">
                             <span>Shipping & Returns</span>
                             <span class="toggle-icon">+</span>
                         </div>
@@ -587,7 +613,7 @@
 
         function updateTotalPrice() {
             const quantity = parseInt(document.getElementById('quantity').value);
-            const basePrice = 24.99;
+            const basePrice = parseFloat(document.querySelector('.price').textContent.replace('$', ''));
             const total = (basePrice * quantity).toFixed(2);
             document.getElementById('totalPrice').textContent = `$${total}`;
         }
@@ -595,15 +621,18 @@
         function toggleDetails(element) {
             const content = element.nextElementSibling;
             const icon = element.querySelector('.toggle-icon');
+            const isExpanded = content.classList.contains('active');
             
-            if (content.classList.contains('active')) {
+            if (isExpanded) {
                 content.classList.remove('active');
                 icon.textContent = '+';
                 icon.classList.remove('rotated');
+                element.setAttribute('aria-expanded', 'false');
             } else {
                 content.classList.add('active');
                 icon.textContent = '+';
                 icon.classList.add('rotated');
+                element.setAttribute('aria-expanded', 'true');
             }
         }
 
@@ -630,6 +659,19 @@
 
         // Update total price when quantity input changes directly
         document.getElementById('quantity').addEventListener('input', updateTotalPrice);
+
+        // Keyboard accessibility for details sections
+        document.querySelectorAll('.details-header').forEach(header => {
+            header.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleDetails(this);
+                }
+            });
+        });
+
+        // Initialize price calculation
+        updateTotalPrice();
     </script>
 </body>
 </html>
