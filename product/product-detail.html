@@ -1,677 +1,1918 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Silent Patient - Bookstore</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="checkout.css" />
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      
 
-        body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            background-color: #faf9f7;
-            color: #2c2c2c;
-            line-height: 1.6;
-            font-size: clamp(14px, 2.5vw, 16px);
-        }
+      body {
+        background-color: #ffffff;
+        color: #2c2c2c;
+        line-height: 1.6;
+      }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: clamp(20px, 5vw, 40px);
-        }
+      .kontainer {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: clamp(20px, 5vw, 40px);
+      }
 
+      .product-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(30px, 8vw, 60px);
+        align-items: start;
+      }
+
+      .image-section {
+        position: sticky;
+        top: 40px;
+      }
+
+      .main-image {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        aspect-ratio: 5/6;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease;
+      }
+
+      .main-image:hover {
+        transform: scale(1.02);
+      }
+
+      .thumbnail-row {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+        justify-content: center;
+        overflow-x: auto;
+        padding: 5px 0;
+        scrollbar-width: thin;
+        scrollbar-color: #8b6f47 transparent;
+      }
+
+      .thumbnail-row::-webkit-scrollbar {
+        height: 4px;
+      }
+
+      .thumbnail-row::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .thumbnail-row::-webkit-scrollbar-thumb {
+        background-color: #8b6f47;
+        border-radius: 2px;
+      }
+
+      .thumbnail {
+        width: 80px;
+        height: 100px;
+        min-width: 80px;
+        border-radius: 6px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        object-fit: cover;
+      }
+
+      .thumbnail:hover,
+      .thumbnail.active {
+        border-color: #8b6f47;
+        transform: scale(1.05);
+      }
+
+      .product-info {
+        padding: 20px 0;
+      }
+
+      .book-title {
+        font-weight: 300;
+        color: #2c2c2c;
+        margin-bottom: 8px;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+      }
+
+      .author {
+        color: #8b6f47;
+        margin-bottom: 4px;
+        font-style: italic;
+      }
+
+      .publisher {
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      .price {
+        font-weight: 400;
+        color: #2c2c2c;
+        margin: 20px 0;
+      }
+
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .stars {
+        color: #ffd700;
+      }
+
+      .rating-text {
+        color: #666;
+      }
+
+      .description {
+        line-height: 1.8;
+        color: #4a4a4a;
+        margin: 25px 0;
+        text-align: justify;
+      }
+
+      .quantity-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin: 30px 0;
+        flex-wrap: wrap;
+      }
+
+      .quantity-label {
+        font-weight: 500;
+        color: #2c2c2c;
+      }
+
+      .quantity-controls {
+        display: flex;
+        align-items: center;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        background: white;
+      }
+
+      .quantity-btn {
+        background: none;
+        border: none;
+        width: clamp(35px, 8vw, 40px);
+        height: clamp(35px, 8vw, 40px);
+        cursor: pointer;
+        color: #666;
+        transition: all 0.2s ease;
+        touch-action: manipulation;
+      }
+
+      .quantity-btn:hover {
+        background-color: #f5f5f5;
+        color: #2c2c2c;
+      }
+
+      .quantity-input {
+        border: none;
+        width: clamp(50px, 12vw, 60px);
+        height: clamp(35px, 8vw, 40px);
+        text-align: center;
+        background: transparent;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 15px;
+        margin: 30px 0;
+      }
+
+      .btn {
+        padding: clamp(12px, 3vw, 15px) clamp(20px, 5vw, 30px);
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        flex: 1;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        touch-action: manipulation;
+        min-height: 48px;
+      }
+
+      .btn-primary {
+        background-color: #2c2c2c;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: #1a1a1a;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-secondary {
+        background-color: transparent;
+        color: #2c2c2c;
+        border: 2px solid #2c2c2c;
+      }
+
+      .btn-secondary:hover {
+        background-color: #2c2c2c;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .details-section {
+        margin-top: 40px;
+      }
+
+      .details-item {
+        border-bottom: 1px solid #e8e8e8;
+        margin-bottom: 15px;
+      }
+
+      .details-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        cursor: pointer;
+        font-weight: 500;
+        color: #2c2c2c;
+        min-height: 48px;
+        touch-action: manipulation;
+      }
+
+      .details-header:hover {
+        color: #8b6f47;
+      }
+
+      .details-content {
+        padding-bottom: 15px;
+        color: #666;
+        line-height: 1.7;
+        display: none;
+      }
+
+      .details-content.active {
+        display: block;
+      }
+
+      .toggle-icon {
+        transition: transform 0.3s ease;
+      }
+
+      .toggle-icon.rotated {
+        transform: rotate(45deg);
+      }
+
+      .format-options {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+      }
+
+      .format-btn {
+        padding: clamp(6px, 2vw, 8px) clamp(12px, 3vw, 16px);
+        border: 2px solid #e0e0e0;
+        background: white;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        touch-action: manipulation;
+        min-height: 36px;
+        white-space: nowrap;
+      }
+
+      .format-btn:hover,
+      .format-btn.active {
+        border-color: #8b6f47;
+        background-color: #8b6f47;
+        color: white;
+      }
+
+      /* Tablet styles */
+      @media (max-width: 1024px) {
         .product-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: clamp(30px, 8vw, 60px);
-            align-items: start;
+          gap: 40px;
         }
 
         .image-section {
-            position: sticky;
-            top: 40px;
+          position: static;
+        }
+      }
+
+      /* Mobile styles */
+      @media (max-width: 768px) {
+        .product-section {
+          grid-template-columns: 1fr;
+          gap: 20px;
         }
 
-        .main-image {
-            width: 100%;
-            max-width: 500px;
-            height: auto;
-            aspect-ratio: 5/6;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease;
-        }
-
-        .main-image:hover {
-            transform: scale(1.02);
-        }
-
-        .thumbnail-row {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-            justify-content: center;
-            overflow-x: auto;
-            padding: 5px 0;
-            scrollbar-width: thin;
-            scrollbar-color: #8b6f47 transparent;
-        }
-
-        .thumbnail-row::-webkit-scrollbar {
-            height: 4px;
-        }
-
-        .thumbnail-row::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .thumbnail-row::-webkit-scrollbar-thumb {
-            background-color: #8b6f47;
-            border-radius: 2px;
-        }
-
-        .thumbnail {
-            width: 80px;
-            height: 100px;
-            min-width: 80px;
-            border-radius: 6px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            object-fit: cover;
-        }
-
-        .thumbnail:hover,
-        .thumbnail.active {
-            border-color: #8b6f47;
-            transform: scale(1.05);
+        .image-section {
+          order: 1;
         }
 
         .product-info {
-            padding: 20px 0;
-        }
-
-        .book-title {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            font-weight: 300;
-            color: #2c2c2c;
-            margin-bottom: 8px;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-        }
-
-        .author {
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            color: #8b6f47;
-            margin-bottom: 4px;
-            font-style: italic;
-        }
-
-        .publisher {
-            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        .price {
-            font-size: clamp(1.6rem, 4vw, 2.2rem);
-            font-weight: 400;
-            color: #2c2c2c;
-            margin: 20px 0;
-        }
-
-        .rating {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .stars {
-            color: #ffd700;
-            font-size: clamp(1rem, 2.5vw, 1.1rem);
-        }
-
-        .rating-text {
-            color: #666;
-            font-size: clamp(0.8rem, 2vw, 0.9rem);
-        }
-
-        .description {
-            font-size: clamp(0.9rem, 2.5vw, 1rem);
-            line-height: 1.8;
-            color: #4a4a4a;
-            margin: 25px 0;
-            text-align: justify;
+          order: 2;
+          padding: 10px 0;
         }
 
         .quantity-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-
-        .quantity-label {
-            font-weight: 500;
-            color: #2c2c2c;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 10px;
         }
 
         .quantity-controls {
-            display: flex;
-            align-items: center;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            background: white;
-        }
-
-        .quantity-btn {
-            background: none;
-            border: none;
-            width: clamp(35px, 8vw, 40px);
-            height: clamp(35px, 8vw, 40px);
-            cursor: pointer;
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            color: #666;
-            transition: all 0.2s ease;
-            touch-action: manipulation;
-        }
-
-        .quantity-btn:hover {
-            background-color: #f5f5f5;
-            color: #2c2c2c;
-        }
-
-        .quantity-input {
-            border: none;
-            width: clamp(50px, 12vw, 60px);
-            height: clamp(35px, 8vw, 40px);
-            text-align: center;
-            font-size: clamp(0.9rem, 2.5vw, 1rem);
-            background: transparent;
+          align-self: center;
         }
 
         .button-group {
-            display: flex;
-            gap: 15px;
-            margin: 30px 0;
+          gap: 12px;
         }
 
-        .btn {
-            padding: clamp(12px, 3vw, 15px) clamp(20px, 5vw, 30px);
-            border: none;
-            border-radius: 8px;
-            font-size: clamp(0.9rem, 2.5vw, 1rem);
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            flex: 1;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            touch-action: manipulation;
-            min-height: 48px;
+        .description {
+          text-align: left;
         }
 
-        .btn-primary {
-            background-color: #2c2c2c;
-            color: white;
+        .thumbnail {
+          width: 70px;
+          height: 85px;
+          min-width: 70px;
+        }
+      }
+
+      /* Small mobile styles */
+      @media (max-width: 480px) {
+        .kontainer {
+          padding: 15px 10px;
         }
 
-        .btn-primary:hover {
-            background-color: #1a1a1a;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: #2c2c2c;
-            border: 2px solid #2c2c2c;
-        }
-
-        .btn-secondary:hover {
-            background-color: #2c2c2c;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .details-section {
-            margin-top: 40px;
-        }
-
-        .details-item {
-            border-bottom: 1px solid #e8e8e8;
-            margin-bottom: 15px;
-        }
-
-        .details-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            cursor: pointer;
-            font-weight: 500;
-            color: #2c2c2c;
-            font-size: clamp(0.9rem, 2.5vw, 1rem);
-            min-height: 48px;
-            touch-action: manipulation;
-        }
-
-        .details-header:hover {
-            color: #8b6f47;
-        }
-
-        .details-content {
-            padding-bottom: 15px;
-            color: #666;
-            line-height: 1.7;
-            display: none;
-            font-size: clamp(0.85rem, 2.2vw, 0.95rem);
-        }
-
-        .details-content.active {
-            display: block;
-        }
-
-        .toggle-icon {
-            transition: transform 0.3s ease;
-            font-size: clamp(1rem, 3vw, 1.2rem);
-        }
-
-        .toggle-icon.rotated {
-            transform: rotate(45deg);
+        .thumbnail {
+          width: 60px;
+          height: 75px;
+          min-width: 60px;
         }
 
         .format-options {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-            flex-wrap: wrap;
+          gap: 8px;
         }
 
         .format-btn {
-            padding: clamp(6px, 2vw, 8px) clamp(12px, 3vw, 16px);
-            border: 2px solid #e0e0e0;
-            background: white;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: clamp(0.8rem, 2.2vw, 0.9rem);
-            touch-action: manipulation;
-            min-height: 36px;
-            white-space: nowrap;
+          min-width: 70px;
+        }
+      }
+
+      /* Very small screens */
+      @media (max-width: 320px) {
+        .format-options {
+          flex-direction: column;
+          align-items: stretch;
         }
 
-        .format-btn:hover,
-        .format-btn.active {
-            border-color: #8b6f47;
-            background-color: #8b6f47;
-            color: white;
+        .format-btn {
+          text-align: center;
+        }
+      }
+
+      /* High DPI displays */
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .main-image,
+        .thumbnail {
+          image-rendering: -webkit-optimize-contrast;
+          image-rendering: crisp-edges;
+        }
+      }
+
+      /* Focus styles for accessibility */
+      .btn:focus,
+      .format-btn:focus,
+      .quantity-btn:focus,
+      .details-header:focus {
+        outline: 2px solid #8b6f47;
+        outline-offset: 2px;
+      }
+
+      /* Reduced motion preference */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* Dark mode support */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #1a1a1a;
+          color: #e0e0e0;
         }
 
-        /* Tablet styles */
-        @media (max-width: 1024px) {
-            .product-section {
-                gap: 40px;
-            }
-            
-            .image-section {
-                position: static;
-            }
+        .kontainer {
+          background-color: #1a1a1a;
         }
 
-        /* Mobile styles */
-        @media (max-width: 768px) {
-            .product-section {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .image-section {
-                order: 1;
-            }
-
-            .product-info {
-                order: 2;
-                padding: 10px 0;
-            }
-
-            .quantity-section {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 10px;
-            }
-
-            .quantity-controls {
-                align-self: center;
-            }
-
-            .button-group {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .description {
-                text-align: left;
-            }
-
-            .thumbnail {
-                width: 70px;
-                height: 85px;
-                min-width: 70px;
-            }
+        .book-title {
+          color: #ffffff;
         }
 
-        /* Small mobile styles */
-        @media (max-width: 480px) {
-            .container {
-                padding: 15px 10px;
-            }
-
-            .thumbnail {
-                width: 60px;
-                height: 75px;
-                min-width: 60px;
-            }
-
-            .format-options {
-                gap: 8px;
-            }
-
-            .format-btn {
-                min-width: 70px;
-            }
+        .author {
+          color: #d4a574;
         }
 
-        /* Very small screens */
-        @media (max-width: 320px) {
-            .format-options {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .format-btn {
-                text-align: center;
-            }
+        .publisher,
+        .rating-text {
+          color: #b0b0b0;
         }
 
-        /* High DPI displays */
-        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-            .main-image,
-            .thumbnail {
-                image-rendering: -webkit-optimize-contrast;
-                image-rendering: crisp-edges;
-            }
+        .price {
+          color: #ffffff;
         }
 
-        /* Focus styles for accessibility */
-        .btn:focus,
-        .format-btn:focus,
-        .quantity-btn:focus,
-        .details-header:focus {
-            outline: 2px solid #8b6f47;
-            outline-offset: 2px;
+        .description {
+          color: #c0c0c0;
         }
 
-        /* Reduced motion preference */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
+        .quantity-controls {
+          background: #2a2a2a;
+          border-color: #404040;
         }
 
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #1a1a1a;
-                color: #e0e0e0;
-            }
-
-            .container {
-                background-color: #1a1a1a;
-            }
-
-            .book-title {
-                color: #ffffff;
-            }
-
-            .author {
-                color: #d4a574;
-            }
-
-            .publisher,
-            .rating-text {
-                color: #b0b0b0;
-            }
-
-            .price {
-                color: #ffffff;
-            }
-
-            .description {
-                color: #c0c0c0;
-            }
-
-            .quantity-controls {
-                background: #2a2a2a;
-                border-color: #404040;
-            }
-
-            .format-btn {
-                background: #2a2a2a;
-                border-color: #404040;
-                color: #e0e0e0;
-            }
-
-            .details-item {
-                border-bottom-color: #404040;
-            }
-
-            .details-header {
-                color: #ffffff;
-            }
-
-            .details-content {
-                color: #b0b0b0;
-            }
+        .format-btn {
+          background: #2a2a2a;
+          border-color: #404040;
+          color: #e0e0e0;
         }
+
+        .details-item {
+          border-bottom-color: #404040;
+        }
+
+        .details-header {
+          color: #ffffff;
+        }
+
+        .details-content {
+          color: #b0b0b0;
+        }
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="product-section">
-            <div class="image-section">
-                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=500&h=600&fit=crop&auto=format" alt="The Silent Patient" class="main-image" id="mainImage">
-                <div class="thumbnail-row">
-                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=80&h=100&fit=crop&auto=format" alt="Cover view" class="thumbnail active" onclick="changeImage(this)">
-                    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=80&h=100&fit=crop&auto=format" alt="Back cover" class="thumbnail" onclick="changeImage(this)">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=100&fit=crop&auto=format" alt="Inside pages" class="thumbnail" onclick="changeImage(this)">
-                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=80&h=100&fit=crop&auto=format" alt="Detail view" class="thumbnail" onclick="changeImage(this)">
-                </div>
-            </div>
-
-            <div class="product-info">
-                <h1 class="book-title">The Silent Patient</h1>
-                <p class="author">by Alex Michaelides</p>
-                <p class="publisher">Celadon Books</p>
-
-                <div class="rating">
-                    <span class="stars">★★★★★</span>
-                    <span class="rating-text">(4.2) 2,847 reviews</span>
-                </div>
-
-                <div class="format-options">
-                    <button class="format-btn active">Hardcover</button>
-                    <button class="format-btn">Paperback</button>
-                    <button class="format-btn">E-book</button>
-                    <button class="format-btn">Audiobook</button>
-                </div>
-
-                <div class="price">$24.99</div>
-
-                <p class="description">
-                    Alicia Berenson's life is seemingly perfect. A famous painter married to an in-demand fashion photographer, she lives in a grand house overlooking a park in one of London's most desirable areas. One evening her husband Gabriel returns home late from a fashion shoot, and Alicia shoots him five times in the face, and then never speaks another word.
-                </p>
-
-                <div class="quantity-section">
-                    <span class="quantity-label">Quantity:</span>
-                    <div class="quantity-controls">
-                        <button class="quantity-btn" onclick="decreaseQuantity()">−</button>
-                        <input type="number" value="1" min="1" max="10" class="quantity-input" id="quantity">
-                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
-                    </div>
-                    <span class="quantity-label" id="totalPrice">$24.99</span>
-                </div>
-
-                <div class="button-group">
-                    <button class="btn btn-secondary">Buy Now</button>
-                    <button class="btn btn-primary">Add to Cart</button>
-                </div>
-
-                <div class="details-section">
-                    <div class="details-item">
-                        <div class="details-header" onclick="toggleDetails(this)" tabindex="0" role="button" aria-expanded="false">
-                            <span>Book Details</span>
-                            <span class="toggle-icon">+</span>
-                        </div>
-                        <div class="details-content">
-                            <strong>ISBN:</strong> 978-1250301697<br>
-                            <strong>Pages:</strong> 336<br>
-                            <strong>Language:</strong> English<br>
-                            <strong>Dimensions:</strong> 6.4 x 1.2 x 9.3 inches<br>
-                            <strong>Weight:</strong> 1.2 pounds<br>
-                            <strong>Publication Date:</strong> February 5, 2019
-                        </div>
-                    </div>
-
-                    <div class="details-item">
-                        <div class="details-header" onclick="toggleDetails(this)" tabindex="0" role="button" aria-expanded="false">
-                            <span>About the Author</span>
-                            <span class="toggle-icon">+</span>
-                        </div>
-                        <div class="details-content">
-                            Alex Michaelides is an internationally bestselling novelist. He was born and raised in Cyprus and is a graduate of Cambridge University and the American Film Institute. His debut novel, The Silent Patient, spent over a year on the New York Times bestseller list and has sold millions of copies worldwide.
-                        </div>
-                    </div>
-
-                    <div class="details-item">
-                        <div class="details-header" onclick="toggleDetails(this)" tabindex="0" role="button" aria-expanded="false">
-                            <span>Shipping & Returns</span>
-                            <span class="toggle-icon">+</span>
-                        </div>
-                        <div class="details-content">
-                            <strong>Free shipping</strong> on orders over $25<br>
-                            <strong>Standard delivery:</strong> 3-5 business days<br>
-                            <strong>Express delivery:</strong> 1-2 business days<br>
-                            <strong>Returns:</strong> 30-day return policy with receipt
-                        </div>
-                    </div>
-                </div>
-            </div>
+  </head>
+  <body>
+    <header class="header">
+      <div class="alert">
+        <div class="container">
+          <p class="alert-text">Free Shipping On All U.S. Orders $50+</p>
         </div>
+      </div>
+
+      <div class="header-top" data-header>
+        <div class="container">
+          <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+            <span class="line line-1"></span>
+            <span class="line line-2"></span>
+            <span class="line line-3"></span>
+          </button>
+
+          <div class="input-wrapper">
+            <input
+              type="search"
+              name="search"
+              placeholder="Search product"
+              class="search-field"
+            />
+
+            <button class="search-submit" aria-label="search">
+              <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+            </button>
+          </div>
+
+          <a href="#" class="logo">
+            <img
+              src="../assets/images/logo.png"
+              width="179"
+              height="26"
+              alt="Glowing"
+            />
+          </a>
+
+          <div class="header-actions">
+            <button class="header-action-btn" aria-label="user">
+              <ion-icon
+                name="person-outline"
+                aria-hidden="true"
+                aria-hidden="true"
+              ></ion-icon>
+            </button>
+
+            <button class="header-action-btn" aria-label="favourite item">
+              <ion-icon
+                name="star-outline"
+                aria-hidden="true"
+                aria-hidden="true"
+              ></ion-icon>
+
+              <span class="btn-badge">0</span>
+            </button>
+
+            <button class="header-action-btn" aria-label="cart item">
+              <data class="btn-text" value="0">$0.00</data>
+
+              <ion-icon
+                name="bag-handle-outline"
+                aria-hidden="true"
+                aria-hidden="true"
+              ></ion-icon>
+
+              <span class="btn-badge">0</span>
+            </button>
+          </div>
+
+          <nav class="navbar">
+            <ul class="navbar-list">
+              <li>
+                <a href="#home" class="navbar-link has-after">Home</a>
+              </li>
+
+              <li>
+                <a href="#collection" class="navbar-link has-after"
+                  >Collection</a
+                >
+              </li>
+
+              <li>
+                <a href="#shop" class="navbar-link has-after">Shop</a>
+              </li>
+
+              <li>
+                <a href="#offer" class="navbar-link has-after">Offer</a>
+              </li>
+
+              <li>
+                <a href="#blog" class="navbar-link has-after">Blog</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div class="sidebar">
+      <div class="mobile-navbar" data-navbar>
+        <div class="wrapper">
+          <a href="#" class="logo">
+            <img
+              src="../assets/images/logo.png"
+              width="179"
+              height="26"
+              alt="Glowing"
+            />
+          </a>
+
+          <button
+            class="nav-close-btn"
+            aria-label="close menu"
+            data-nav-toggler
+          >
+            <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+          </button>
+        </div>
+
+        <ul class="navbar-list">
+          <li>
+            <a href="#home" class="navbar-link" data-nav-link>Home</a>
+          </li>
+
+          <li>
+            <a href="#collection" class="navbar-link" data-nav-link
+              >Collection</a
+            >
+          </li>
+
+          <li>
+            <a href="#shop" class="navbar-link" data-nav-link>Shop</a>
+          </li>
+
+          <li>
+            <a href="#offer" class="navbar-link" data-nav-link>Offer</a>
+          </li>
+
+          <li>
+            <a href="#blog" class="navbar-link" data-nav-link>Blog</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="overlay" data-nav-toggler data-overlay></div>
     </div>
 
+    <div class="kontainer">
+      <div class="product-section">
+        <div class="image-section">
+          <img
+            src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=500&h=600&fit=crop&auto=format"
+            alt="The Silent Patient"
+            class="main-image"
+            id="mainImage"
+          />
+          <div class="thumbnail-row">
+            <img
+              src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=80&h=100&fit=crop&auto=format"
+              alt="Cover view"
+              class="thumbnail active"
+              onclick="changeImage(this)"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=80&h=100&fit=crop&auto=format"
+              alt="Back cover"
+              class="thumbnail"
+              onclick="changeImage(this)"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=100&fit=crop&auto=format"
+              alt="Inside pages"
+              class="thumbnail"
+              onclick="changeImage(this)"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=80&h=100&fit=crop&auto=format"
+              alt="Detail view"
+              class="thumbnail"
+              onclick="changeImage(this)"
+            />
+          </div>
+        </div>
+
+        <div class="product-info">
+          <h1 class="book-title">The Silent Patient</h1>
+          <p class="author">by Alex Michaelides</p>
+          <p class="publisher">Celadon Books</p>
+
+          <div class="rating">
+            <span class="stars">★★★★★</span>
+            <span class="rating-text">(4.2) 2,847 reviews</span>
+          </div>
+
+          <div class="format-options">
+            <button class="format-btn active">Hardcover</button>
+            <button class="format-btn">Paperback</button>
+            <button class="format-btn">E-book</button>
+            <button class="format-btn">Audiobook</button>
+          </div>
+
+          <div class="price">$24.99</div>
+
+          <p class="description">
+            Alicia Berenson's life is seemingly perfect. A famous painter
+            married to an in-demand fashion photographer, she lives in a grand
+            house overlooking a park in one of London's most desirable areas.
+            One evening her husband Gabriel returns home late from a fashion
+            shoot, and Alicia shoots him five times in the face, and then never
+            speaks another word.
+          </p>
+
+          <div class="quantity-section">
+            <span class="quantity-label">Quantity:</span>
+            <div class="quantity-controls">
+              <button class="quantity-btn" onclick="decreaseQuantity()">
+                −
+              </button>
+              <input
+                type="number"
+                value="1"
+                min="1"
+                max="10"
+                class="quantity-input"
+                id="quantity"
+              />
+              <button class="quantity-btn" onclick="increaseQuantity()">
+                +
+              </button>
+            </div>
+            <span class="quantity-label" id="totalPrice">$24.99</span>
+          </div>
+
+          <div class="button-group">
+            <button class="btn btn-secondary">Buy Now</button>
+            <button class="btn btn-primary">Add to Cart</button>
+          </div>
+
+          <div class="details-section">
+            <div class="details-item">
+              <div
+                class="details-header"
+                onclick="toggleDetails(this)"
+                tabindex="0"
+                role="button"
+                aria-expanded="false"
+              >
+                <span>Book Details</span>
+                <span class="toggle-icon">+</span>
+              </div>
+              <div class="details-content">
+                <strong>ISBN:</strong> 978-1250301697<br />
+                <strong>Pages:</strong> 336<br />
+                <strong>Language:</strong> English<br />
+                <strong>Dimensions:</strong> 6.4 x 1.2 x 9.3 inches<br />
+                <strong>Weight:</strong> 1.2 pounds<br />
+                <strong>Publication Date:</strong> February 5, 2019
+              </div>
+            </div>
+
+            <div class="details-item">
+              <div
+                class="details-header"
+                onclick="toggleDetails(this)"
+                tabindex="0"
+                role="button"
+                aria-expanded="false"
+              >
+                <span>About the Author</span>
+                <span class="toggle-icon">+</span>
+              </div>
+              <div class="details-content">
+                Alex Michaelides is an internationally bestselling novelist. He
+                was born and raised in Cyprus and is a graduate of Cambridge
+                University and the American Film Institute. His debut novel, The
+                Silent Patient, spent over a year on the New York Times
+                bestseller list and has sold millions of copies worldwide.
+              </div>
+            </div>
+
+            <div class="details-item">
+              <div
+                class="details-header"
+                onclick="toggleDetails(this)"
+                tabindex="0"
+                role="button"
+                aria-expanded="false"
+              >
+                <span>Shipping & Returns</span>
+                <span class="toggle-icon">+</span>
+              </div>
+              <div class="details-content">
+                <strong>Free shipping</strong> on orders over $25<br />
+                <strong>Standard delivery:</strong> 3-5 business days<br />
+                <strong>Express delivery:</strong> 1-2 business days<br />
+                <strong>Returns:</strong> 30-day return policy with receipt
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="section shop" id="shop" aria-label="shop" data-section>
+          <div class="container">
+            <div class="title-wrapper">
+              <h2 class="h2 section-title">Related Products</h2>
+
+             
+            </div>
+
+            <ul class="has-scrollbar">
+              <li class="scrollbar-item">
+                <div class="shop-card">
+                  <div
+                    class="card-banner img-holder"
+                    style="--width: 540; --height: 720"
+                  >
+                    <img
+                      src="../assets/images/product-01.jpg"
+                      width="540"
+                      height="720"
+                      loading="lazy"
+                      alt="Facial cleanser"
+                      class="img-cover"
+                    />
+
+                    <span class="badge" aria-label="20% off">-20%</span>
+
+                    <div class="card-actions">
+                      <button class="action-btn" aria-label="add to cart">
+                        <ion-icon
+                          name="bag-handle-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+
+                      <button class="action-btn" aria-label="add to whishlist">
+                        <ion-icon
+                          name="star-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+
+                      <button class="action-btn" aria-label="compare">
+                        <ion-icon
+                          name="repeat-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <div class="price">
+                      <del class="del">$39.00</del>
+
+                      <span class="span">$29.00</span>
+                    </div>
+
+                    <h3>
+                      <a href="#" class="card-title">Facial cleanser</a>
+                    </h3>
+
+                    <div class="card-rating">
+                      <div class="rating-wrapper" aria-label="5 start rating">
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                      </div>
+
+                      <p class="rating-text">5170 reviews</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li class="scrollbar-item">
+                <div class="shop-card">
+                  <div
+                    class="card-banner img-holder"
+                    style="--width: 540; --height: 720"
+                  >
+                    <img
+                      src="../assets/images/product-02.jpg"
+                      width="540"
+                      height="720"
+                      loading="lazy"
+                      alt="Bio-shroom Rejuvenating Serum"
+                      class="img-cover"
+                    />
+
+                    <div class="card-actions">
+                      <button class="action-btn" aria-label="add to cart">
+                        <ion-icon
+                          name="bag-handle-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+
+                      <button class="action-btn" aria-label="add to whishlist">
+                        <ion-icon
+                          name="star-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+
+                      <button class="action-btn" aria-label="compare">
+                        <ion-icon
+                          name="repeat-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <div class="price">
+                      <span class="span">$29.00</span>
+                    </div>
+
+                    <h3>
+                      <a href="#" class="card-title"
+                        >Bio-shroom Rejuvenating Serum</a
+                      >
+                    </h3>
+
+                    <div class="card-rating">
+                      <div class="rating-wrapper" aria-label="5 start rating">
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                      </div>
+
+                      <p class="rating-text">5170 reviews</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li class="scrollbar-item">
+                <div class="shop-card">
+                  <div
+                    class="card-banner img-holder"
+                    style="--width: 540; --height: 720"
+                  >
+                    <img
+                      src="../assets/images/product-03.jpg"
+                      width="540"
+                      height="720"
+                      loading="lazy"
+                      alt="Coffee Bean Caffeine Eye Cream"
+                      class="img-cover"
+                    />
+
+                    <div class="card-actions">
+                      <button class="action-btn" aria-label="add to cart">
+                        <ion-icon
+                          name="bag-handle-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+
+                      <button class="action-btn" aria-label="add to whishlist">
+                        <ion-icon
+                          name="star-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+
+                      <button class="action-btn" aria-label="compare">
+                        <ion-icon
+                          name="repeat-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <div class="price">
+                      <span class="span">$29.00</span>
+                    </div>
+
+                    <h3>
+                      <a href="#" class="card-title"
+                        >Coffee Bean Caffeine Eye Cream</a
+                      >
+                    </h3>
+
+                    <div class="card-rating">
+                      <div class="rating-wrapper" aria-label="5 start rating">
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                      </div>
+
+                      <p class="rating-text">5170 reviews</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li class="scrollbar-item">
+                <div class="shop-card">
+                  <div
+                    class="card-banner img-holder"
+                    style="--width: 540; --height: 720"
+                  >
+                    <img
+                      src="../assets/images/product-04.jpg"
+                      width="540"
+                      height="720"
+                      loading="lazy"
+                      alt="Facial cleanser"
+                      class="img-cover"
+                    />
+
+                    <div class="card-actions">
+                      <button class="action-btn" aria-label="add to cart">
+                        <ion-icon
+                          name="bag-handle-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+
+                      <button class="action-btn" aria-label="add to whishlist">
+                        <ion-icon
+                          name="star-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+
+                      <button class="action-btn" aria-label="compare">
+                        <ion-icon
+                          name="repeat-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <div class="price">
+                      <span class="span">$29.00</span>
+                    </div>
+
+                    <h3>
+                      <a href="#" class="card-title">Facial cleanser</a>
+                    </h3>
+
+                    <div class="card-rating">
+                      <div class="rating-wrapper" aria-label="5 start rating">
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                      </div>
+
+                      <p class="rating-text">5170 reviews</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li class="scrollbar-item">
+                <div class="shop-card">
+                  <div
+                    class="card-banner img-holder"
+                    style="--width: 540; --height: 720"
+                  >
+                    <img
+                      src="../assets/images/product-05.jpg"
+                      width="540"
+                      height="720"
+                      loading="lazy"
+                      alt="Coffee Bean Caffeine Eye Cream"
+                      class="img-cover"
+                    />
+
+                    <span class="badge" aria-label="20% off">-20%</span>
+
+                    <div class="card-actions">
+                      <button class="action-btn" aria-label="add to cart">
+                        <ion-icon
+                          name="bag-handle-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+
+                      <button class="action-btn" aria-label="add to whishlist">
+                        <ion-icon
+                          name="star-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+
+                      <button class="action-btn" aria-label="compare">
+                        <ion-icon
+                          name="repeat-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <div class="price">
+                      <del class="del">$39.00</del>
+
+                      <span class="span">$29.00</span>
+                    </div>
+
+                    <h3>
+                      <a href="#" class="card-title"
+                        >Coffee Bean Caffeine Eye Cream</a
+                      >
+                    </h3>
+
+                    <div class="card-rating">
+                      <div class="rating-wrapper" aria-label="5 start rating">
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                      </div>
+
+                      <p class="rating-text">5170 reviews</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li class="scrollbar-item">
+                <div class="shop-card">
+                  <div
+                    class="card-banner img-holder"
+                    style="--width: 540; --height: 720"
+                  >
+                    <img
+                      src="../assets/images/product-06.jpg"
+                      width="540"
+                      height="720"
+                      loading="lazy"
+                      alt="Facial cleanser"
+                      class="img-cover"
+                    />
+
+                    <div class="card-actions">
+                      <button class="action-btn" aria-label="add to cart">
+                        <ion-icon
+                          name="bag-handle-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+
+                      <button class="action-btn" aria-label="add to whishlist">
+                        <ion-icon
+                          name="star-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+
+                      <button class="action-btn" aria-label="compare">
+                        <ion-icon
+                          name="repeat-outline"
+                          aria-hidden="true"
+                        ></ion-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <div class="price">
+                      <span class="span">$29.00</span>
+                    </div>
+
+                    <h3>
+                      <a href="#" class="card-title">Facial cleanser</a>
+                    </h3>
+
+                    <div class="card-rating">
+                      <div class="rating-wrapper" aria-label="5 start rating">
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                      </div>
+
+                      <p class="rating-text">5170 reviews</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+    <nav class="bottom-nav">
+      <div class="bottom-nav-container">
+        <a href="#" class="bottom-nav-item" data-nav="profile">
+          <ion-icon name="person-outline" class="bottom-nav-icon"></ion-icon>
+          <span class="bottom-nav-label">Profile</span>
+        </a>
+
+        <a href="#" class="bottom-nav-item cart">
+          <ion-icon
+            name="bag-handle-outline"
+            class="bottom-nav-icon"
+          ></ion-icon>
+          <span class="bottom-nav-label">Cart</span>
+          <div class="cart-badge">2</div>
+        </a>
+
+        <a href="#" class="bottom-nav-item" data-nav="search">
+          <ion-icon name="search-outline" class="bottom-nav-icon"></ion-icon>
+          <span class="bottom-nav-label">Search</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="cart-drawer" id="cartDrawer">
+      <div class="cart-drawer-overlay"></div>
+      <div class="cart-drawer-content">
+        <div class="cart-drawer-header">
+          <h3>Shopping Cart</h3>
+          <button class="cart-drawer-close" id="closeCartDrawer">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+        </div>
+        <div class="cart-drawer-body">
+          <!-- This will be loaded from cart.html or populated dynamically -->
+          <div class="cart-item">
+            <img
+              src="../assets/images/product-1.jpg"
+              alt="Product"
+              class="cart-item-image"
+            />
+            <div class="cart-item-details">
+              <h4>DuoComfort Sofa Premium</h4>
+              <p class="cart-item-price">$20.00</p>
+              <div class="cart-item-quantity">
+                <button class="qty-btn minus">-</button>
+                <span>1</span>
+                <button class="qty-btn plus">+</button>
+              </div>
+            </div>
+          </div>
+          <!-- Add more cart items here -->
+        </div>
+        <div class="cart-drawer-footer">
+          <div class="cart-total">
+            <span>Total: $45.00</span>
+          </div>
+          <button class="checkout-btn">Proceed to Checkout</button>
+          <a href="cart.html" class="view-cart-btn">View Full Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="search-overlay" id="searchOverlay">
+      <div class="search-overlay-content">
+        <div class="search-header">
+          <div class="search-input-container">
+            <ion-icon
+              name="search-outline"
+              class="search-input-icon"
+            ></ion-icon>
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search products..."
+              id="mobileSearchInput"
+              autocomplete="off"
+            />
+            <button class="search-clear" id="clearSearch" style="display: none">
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+          </div>
+          <button class="search-close" id="closeSearch">Cancel</button>
+        </div>
+
+        <div class="search-suggestions" id="searchSuggestions">
+          <div class="search-section">
+            <h4 class="search-section-title">Popular Searches</h4>
+            <div class="search-tags">
+              <span class="search-tag">Sofas</span>
+              <span class="search-tag">Chairs</span>
+              <span class="search-tag">Tables</span>
+              <span class="search-tag">Desks</span>
+              <span class="search-tag">Lighting</span>
+            </div>
+          </div>
+
+          <div class="search-section">
+            <h4 class="search-section-title">Recent Searches</h4>
+            <div class="recent-searches">
+              <div class="recent-search-item">
+                <ion-icon name="time-outline"></ion-icon>
+                <span>Modern sofa</span>
+                <button class="remove-recent">
+                  <ion-icon name="close-outline"></ion-icon>
+                </button>
+              </div>
+              <div class="recent-search-item">
+                <ion-icon name="time-outline"></ion-icon>
+                <span>Office chair</span>
+                <button class="remove-recent">
+                  <ion-icon name="close-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="search-results" id="searchResults" style="display: none">
+          <!-- Dynamic search results will be populated here -->
+          <div class="search-result-item">
+            <img
+              src="../assets/images/product-1.jpg"
+              alt="Product"
+              class="result-image"
+            />
+            <div class="result-details">
+              <h4 class="result-title">DuoComfort Sofa Premium</h4>
+              <p class="result-price">$20.00</p>
+              <p class="result-category">Living Room</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-overlay" id="profileOverlay">
+      <div class="profile-overlay-backdrop"></div>
+      <div class="profile-overlay-content">
+        <!-- Logged Out State -->
+        <div class="profile-auth-section" id="authSection">
+          <div class="profile-header">
+            <div class="profile-header-content">
+              <div class="profile-avatar-placeholder">
+                <ion-icon name="person-outline"></ion-icon>
+              </div>
+              <h2 class="profile-title">Welcome to Furnest</h2>
+              <p class="profile-subtitle">
+                Sign in for a personalized experience
+              </p>
+            </div>
+            <button class="profile-close" id="closeProfile">
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+          </div>
+
+          <div class="auth-buttons">
+            <button class="auth-btn primary" id="signInBtn">
+              <ion-icon name="log-in-outline"></ion-icon>
+              Sign In
+            </button>
+            <button class="auth-btn secondary" id="signUpBtn">
+              <ion-icon name="person-add-outline"></ion-icon>
+              Create Account
+            </button>
+          </div>
+
+          <div class="guest-options">
+            <h3 class="section-title">Continue as Guest</h3>
+            <div class="guest-links">
+              <a href="#" class="guest-link">
+                <ion-icon name="bag-handle-outline"></ion-icon>
+                <span>Track Your Order</span>
+                <ion-icon
+                  name="chevron-forward-outline"
+                  class="chevron"
+                ></ion-icon>
+              </a>
+              <a href="#" class="guest-link">
+                <ion-icon name="help-circle-outline"></ion-icon>
+                <span>Customer Support</span>
+                <ion-icon
+                  name="chevron-forward-outline"
+                  class="chevron"
+                ></ion-icon>
+              </a>
+              <a href="#" class="guest-link">
+                <ion-icon name="information-circle-outline"></ion-icon>
+                <span>About Furnest</span>
+                <ion-icon
+                  name="chevron-forward-outline"
+                  class="chevron"
+                ></ion-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Logged In State -->
+        <div
+          class="profile-user-section"
+          id="userSection"
+          style="display: none"
+        >
+          <div class="profile-header logged-in">
+            <div class="profile-header-content">
+              <div class="profile-avatar">
+                <img
+                  src="../assets/images/user-avatar.jpeg"
+                  alt="Profile"
+                  id="userAvatar"
+                />
+                <div class="online-indicator"></div>
+              </div>
+              <div class="user-info">
+                <h2 class="user-name" id="userName">John Doe</h2>
+                <p class="user-email" id="userEmail">john.doe@email.com</p>
+                <div class="user-badge">Premium Member</div>
+              </div>
+            </div>
+            <button class="profile-close" id="closeProfileLoggedIn">
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+          </div>
+
+          <!-- Notifications Section -->
+          <div class="notifications-section">
+            <div class="section-header">
+              <h3 class="section-title">Notifications</h3>
+              <div class="notification-badge">3</div>
+            </div>
+            <div class="notifications-list">
+              <div class="notification-item unread">
+                <div class="notification-icon delivery">
+                  <ion-icon name="cube-outline"></ion-icon>
+                </div>
+                <div class="notification-content">
+                  <p class="notification-title">Order Shipped</p>
+                  <p class="notification-text">
+                    Your DuoComfort Sofa is on the way!
+                  </p>
+                  <span class="notification-time">2 hours ago</span>
+                </div>
+                <div class="unread-dot"></div>
+              </div>
+
+              <div class="notification-item unread">
+                <div class="notification-icon offer">
+                  <ion-icon name="pricetag-outline"></ion-icon>
+                </div>
+                <div class="notification-content">
+                  <p class="notification-title">Special Offer</p>
+                  <p class="notification-text">
+                    20% off all living room furniture
+                  </p>
+                  <span class="notification-time">1 day ago</span>
+                </div>
+                <div class="unread-dot"></div>
+              </div>
+
+              <div class="notification-item">
+                <div class="notification-icon info">
+                  <ion-icon name="checkmark-circle-outline"></ion-icon>
+                </div>
+                <div class="notification-content">
+                  <p class="notification-title">Order Delivered</p>
+                  <p class="notification-text">
+                    Your IronOne Desk has been delivered
+                  </p>
+                  <span class="notification-time">3 days ago</span>
+                </div>
+              </div>
+            </div>
+            <button class="view-all-notifications">
+              View All Notifications
+            </button>
+          </div>
+
+          <!-- Profile Menu -->
+          <div class="profile-menu">
+            <h3 class="section-title">Account</h3>
+            <div class="menu-items">
+              <a href="#" class="menu-item">
+                <ion-icon name="person-outline"></ion-icon>
+                <span>Edit Profile</span>
+                <ion-icon
+                  name="chevron-forward-outline"
+                  class="chevron"
+                ></ion-icon>
+              </a>
+              <a href="#" class="menu-item">
+                <ion-icon name="bag-handle-outline"></ion-icon>
+                <span>My Orders</span>
+                <div class="menu-badge">2</div>
+                <ion-icon
+                  name="chevron-forward-outline"
+                  class="chevron"
+                ></ion-icon>
+              </a>
+              <a href="#" class="menu-item">
+                <ion-icon name="heart-outline"></ion-icon>
+                <span>Wishlist</span>
+                <div class="menu-badge">5</div>
+                <ion-icon
+                  name="chevron-forward-outline"
+                  class="chevron"
+                ></ion-icon>
+              </a>
+              <a href="#" class="menu-item">
+                <ion-icon name="location-outline"></ion-icon>
+                <span>Addresses</span>
+                <ion-icon
+                  name="chevron-forward-outline"
+                  class="chevron"
+                ></ion-icon>
+              </a>
+              <a href="#" class="menu-item">
+                <ion-icon name="card-outline"></ion-icon>
+                <span>Payment Methods</span>
+                <ion-icon
+                  name="chevron-forward-outline"
+                  class="chevron"
+                ></ion-icon>
+              </a>
+              <a href="#" class="menu-item">
+                <ion-icon name="settings-outline"></ion-icon>
+                <span>Settings</span>
+                <ion-icon
+                  name="chevron-forward-outline"
+                  class="chevron"
+                ></ion-icon>
+              </a>
+              <a href="#" class="menu-item">
+                <ion-icon name="help-circle-outline"></ion-icon>
+                <span>Help & Support</span>
+                <ion-icon
+                  name="chevron-forward-outline"
+                  class="chevron"
+                ></ion-icon>
+              </a>
+            </div>
+
+            <button class="sign-out-btn" id="signOutBtn">
+              <ion-icon name="log-out-outline"></ion-icon>
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-modal" id="authModal" style="display: none">
+      <div class="auth-modal-content">
+        <div class="auth-modal-header">
+          <h3 id="authModalTitle">Sign In</h3>
+          <button class="auth-modal-close" id="closeAuthModal">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+        </div>
+        <form class="auth-form" id="authForm">
+          <div class="form-group">
+            <input
+              type="email"
+              placeholder="Email address"
+              required
+              id="authEmail"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              id="authPassword"
+            />
+          </div>
+          <div class="form-group" id="nameGroup" style="display: none">
+            <input type="text" placeholder="Full name" id="authName" />
+          </div>
+          <button type="submit" class="auth-submit-btn" id="authSubmit">
+            Sign In
+          </button>
+        </form>
+        <div class="auth-switch">
+          <span id="authSwitchText">Don't have an account?</span>
+          <button class="auth-switch-btn" id="authSwitchBtn">Sign Up</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer" data-section>
+      <div class="container">
+        <div class="footer-top">
+          <ul class="footer-list">
+            <li>
+              <p class="footer-list-title">Company</p>
+            </li>
+
+            <li>
+              <p class="footer-list-text">
+                Find a location nearest you. See
+                <a href="#" class="link">Our Stores</a>
+              </p>
+            </li>
+
+            <li>
+              <p class="footer-list-text bold">+391 (0)35 2568 4593</p>
+            </li>
+
+            <li>
+              <p class="footer-list-text">hello@domain.com</p>
+            </li>
+          </ul>
+
+          <ul class="footer-list">
+            <li>
+              <p class="footer-list-title">Useful links</p>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">New Products</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Best Sellers</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Bundle & Save</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Online Gift Card</a>
+            </li>
+          </ul>
+
+          <ul class="footer-list">
+            <li>
+              <p class="footer-list-title">Infomation</p>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Start a Return</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Contact Us</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Shipping FAQ</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Terms & Conditions</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Privacy Policy</a>
+            </li>
+          </ul>
+
+          <div class="footer-list">
+            <p class="newsletter-title">Good emails.</p>
+
+            <p class="newsletter-text">
+              Enter your email below to be the first to know about new
+              collections and product launches.
+            </p>
+
+            <form action="" class="newsletter-form">
+              <input
+                type="email"
+                name="email_address"
+                placeholder="Enter your email address"
+                required
+                class="email-field"
+              />
+
+              <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="wrapper">
+            <p class="copyright">&copy; 2022 codewithsadee</p>
+
+            <ul class="social-list">
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-twitter"></ion-icon>
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-youtube"></ion-icon>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <a href="#" class="logo">
+            <img
+              src="../assets/images/logo.png"
+              width="179"
+              height="26"
+              loading="lazy"
+              alt="Glowing"
+            />
+          </a>
+
+          <img
+            src="../assets/images/pay.png"
+            width="313"
+            height="28"
+            alt="available all payment method"
+            class="w-100"
+          />
+        </div>
+      </div>
+    </footer>
+
+    <a
+      href="#top"
+      class="back-top-btn"
+      aria-label="back to top"
+      data-back-top-btn
+    >
+      <ion-icon name="arrow-up" aria-hidden="true"></ion-icon>
+    </a>
+
+    <!-- 
+    - custom js link
+  -->
+    <script src="../assets/js/script.js" defer></script>
+
+    <!-- 
+    - ionicon link
+  -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
     <script>
-        function changeImage(thumbnail) {
-            document.getElementById('mainImage').src = thumbnail.src.replace('w=80&h=100', 'w=500&h=600');
-            
-            document.querySelectorAll('.thumbnail').forEach(thumb => {
-                thumb.classList.remove('active');
-            });
-            thumbnail.classList.add('active');
-        }
-
-        function increaseQuantity() {
-            const input = document.getElementById('quantity');
-            const currentValue = parseInt(input.value);
-            if (currentValue < 10) {
-                input.value = currentValue + 1;
-                updateTotalPrice();
-            }
-        }
-
-        function decreaseQuantity() {
-            const input = document.getElementById('quantity');
-            const currentValue = parseInt(input.value);
-            if (currentValue > 1) {
-                input.value = currentValue - 1;
-                updateTotalPrice();
-            }
-        }
-
-        function updateTotalPrice() {
-            const quantity = parseInt(document.getElementById('quantity').value);
-            const basePrice = parseFloat(document.querySelector('.price').textContent.replace('$', ''));
-            const total = (basePrice * quantity).toFixed(2);
-            document.getElementById('totalPrice').textContent = `$${total}`;
-        }
-
-        function toggleDetails(element) {
-            const content = element.nextElementSibling;
-            const icon = element.querySelector('.toggle-icon');
-            const isExpanded = content.classList.contains('active');
-            
-            if (isExpanded) {
-                content.classList.remove('active');
-                icon.textContent = '+';
-                icon.classList.remove('rotated');
-                element.setAttribute('aria-expanded', 'false');
-            } else {
-                content.classList.add('active');
-                icon.textContent = '+';
-                icon.classList.add('rotated');
-                element.setAttribute('aria-expanded', 'true');
-            }
-        }
-
-        // Format button functionality
-        document.querySelectorAll('.format-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Update price based on format (example prices)
-                const prices = {
-                    'Hardcover': 24.99,
-                    'Paperback': 16.99,
-                    'E-book': 9.99,
-                    'Audiobook': 19.99
-                };
-                
-                const format = this.textContent;
-                const newPrice = prices[format];
-                document.querySelector('.price').textContent = `$${newPrice}`;
-                updateTotalPrice();
-            });
+      // Interactive elements
+      document.addEventListener("DOMContentLoaded", function () {
+        // Shipping options
+        const shippingOptions = document.querySelectorAll(".shipping-option");
+        shippingOptions.forEach((option) => {
+          option.addEventListener("click", function () {
+            shippingOptions.forEach((opt) => opt.classList.remove("selected"));
+            this.classList.add("selected");
+          });
         });
 
-        // Update total price when quantity input changes directly
-        document.getElementById('quantity').addEventListener('input', updateTotalPrice);
-
-        // Keyboard accessibility for details sections
-        document.querySelectorAll('.details-header').forEach(header => {
-            header.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    toggleDetails(this);
-                }
-            });
+        // Checkbox toggle
+        const checkbox = document.querySelector(".checkbox");
+        checkbox.addEventListener("click", function () {
+          this.classList.toggle("checked");
         });
 
-        // Initialize price calculation
-        updateTotalPrice();
+        // Form validation and interactions
+        const inputs = document.querySelectorAll(".form-input");
+        inputs.forEach((input) => {
+          input.addEventListener("focus", function () {
+            this.parentElement.classList.add("focused");
+          });
+
+          input.addEventListener("blur", function () {
+            this.parentElement.classList.remove("focused");
+          });
+        });
+
+        // Apply discount code
+        const applyBtn = document.querySelector(".apply-btn");
+        applyBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          console.log("Applying discount code...");
+        });
+
+        // Pay Now button
+        const payNowBtn = document.querySelector(".pay-now-btn");
+        payNowBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          console.log("Processing payment...");
+        });
+      });
+
+      const bottomNavItems = document.querySelectorAll(".bottom-nav-item");
+      bottomNavItems.forEach((item) => {
+        item.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          // Remove active class from all items
+          bottomNavItems.forEach((navItem) =>
+            navItem.classList.remove("active")
+          );
+
+          // Add active class to clicked item
+          this.classList.add("active");
+
+          // Handle navigation actions
+          const navType = this.getAttribute("data-nav");
+          switch (navType) {
+            case "profile":
+              console.log("Navigate to profile");
+              break;
+            case "search":
+              console.log("Open search");
+              break;
+            case "settings":
+              console.log("Navigate to settings");
+              break;
+            default:
+              console.log("Navigation clicked:", navType || "cart");
+          }
+        });
+      });
+
+      function changeImage(thumbnail) {
+        document.getElementById("mainImage").src = thumbnail.src.replace(
+          "w=80&h=100",
+          "w=500&h=600"
+        );
+
+        document.querySelectorAll(".thumbnail").forEach((thumb) => {
+          thumb.classList.remove("active");
+        });
+        thumbnail.classList.add("active");
+      }
+
+      function increaseQuantity() {
+        const input = document.getElementById("quantity");
+        const currentValue = parseInt(input.value);
+        if (currentValue < 10) {
+          input.value = currentValue + 1;
+          updateTotalPrice();
+        }
+      }
+
+      function decreaseQuantity() {
+        const input = document.getElementById("quantity");
+        const currentValue = parseInt(input.value);
+        if (currentValue > 1) {
+          input.value = currentValue - 1;
+          updateTotalPrice();
+        }
+      }
+
+      function updateTotalPrice() {
+        const quantity = parseInt(document.getElementById("quantity").value);
+        const basePrice = parseFloat(
+          document.querySelector(".price").textContent.replace("$", "")
+        );
+        const total = (basePrice * quantity).toFixed(2);
+        document.getElementById("totalPrice").textContent = `$${total}`;
+      }
+
+      function toggleDetails(element) {
+        const content = element.nextElementSibling;
+        const icon = element.querySelector(".toggle-icon");
+        const isExpanded = content.classList.contains("active");
+
+        if (isExpanded) {
+          content.classList.remove("active");
+          icon.textContent = "+";
+          icon.classList.remove("rotated");
+          element.setAttribute("aria-expanded", "false");
+        } else {
+          content.classList.add("active");
+          icon.textContent = "+";
+          icon.classList.add("rotated");
+          element.setAttribute("aria-expanded", "true");
+        }
+      }
+
+      // Format button functionality
+      document.querySelectorAll(".format-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          document
+            .querySelectorAll(".format-btn")
+            .forEach((b) => b.classList.remove("active"));
+          this.classList.add("active");
+
+          // Update price based on format (example prices)
+          const prices = {
+            Hardcover: 24.99,
+            Paperback: 16.99,
+            "E-book": 9.99,
+            Audiobook: 19.99,
+          };
+
+          const format = this.textContent;
+          const newPrice = prices[format];
+          document.querySelector(".price").textContent = `$${newPrice}`;
+          updateTotalPrice();
+        });
+      });
+
+      // Update total price when quantity input changes directly
+      document
+        .getElementById("quantity")
+        .addEventListener("input", updateTotalPrice);
+
+      // Keyboard accessibility for details sections
+      document.querySelectorAll(".details-header").forEach((header) => {
+        header.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            toggleDetails(this);
+          }
+        });
+      });
+
+      // Initialize price calculation
+      updateTotalPrice();
     </script>
-</body>
+  </body>
 </html>
