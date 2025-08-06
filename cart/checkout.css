@@ -329,7 +329,7 @@
 
 .apply-btn {
   padding: 10px 20px;
-  background-color: #4f46e5;
+  background-color: #2d2d2f;
   color: white;
   border: none;
   border-radius: 6px;
@@ -339,7 +339,7 @@
 }
 
 .apply-btn:hover {
-  background-color: #4338ca;
+  background-color: #2d2d2f;
 }
 
 .order-summary {
@@ -364,7 +364,7 @@
 .pay-now-btn {
   width: 100%;
   padding: 16px;
-  background-color: #4f46e5;
+  background-color: #367945;
   color: white;
   border: none;
   border-radius: 8px;
