@@ -181,7 +181,7 @@
                 <div>Total</div>
             </div>
 
-            <div class="cart-item">
+            <div class="kart-item">
                 <div class="item-details">
                 <div class="item-image"></div>
                 <div class="item-info">
@@ -237,7 +237,7 @@
                 <div class="mobile-total" id="mobile-total-1">Total: $24.99</div>
             </div>
 
-            <div class="cart-item">
+            <div class="kart-item">
                 <div class="item-details">
                 <div class="item-image"></div>
                 <div class="item-info">
@@ -542,7 +542,7 @@
         delete cartItems[itemId];
         document
           .querySelector("#qty-" + itemId)
-          .closest(".cart-item")
+          .closest(".kart-item")
           .remove();
         updateTotals();
       }
