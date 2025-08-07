@@ -159,159 +159,217 @@
     <!-- <main>
       <article> -->
             <div class="kontainer">
-                <div class="main-content">
-                    <!-- Checkout Form -->
-                    <div class="checkout-form">
-                        <h1 class="checkout-title">Checkout</h1>
+        <div class="main-content">
+            <!-- Checkout Form -->
+            <div class="checkout-form">
+                <h1 class="checkout-title">Checkout</h1>
 
-                        <div class="section-title">Shipping Information</div>
+                <div class="section-title">Email</div>
+                <div class="form-group">
+                    <label class="form-label">Email Address<span class="required">*</span></label>
+                    <input type="email" class="form-input" placeholder="Email Address*">
+                </div>
 
-                        <!-- Shipping Options -->
-                        <div class="shipping-options">
-                            <div class="shipping-option selected">
-                                <div class="radio-button"></div>
-                                <svg class="shipping-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                                </svg>
-                                <span>Delivery</span>
-                            </div>
-                            <div class="shipping-option">
-                                <div class="radio-button"></div>
-                                <svg class="shipping-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                </svg>
-                                <span>Pick up</span>
+                <div class="section-title">Protect Your Peloton Bike+</div>
+                <div class="checkbox-group">
+                    <div class="checkbox"></div>
+                    <label class="checkbox-label">12-Month Limited Warranty included. Extend your warranty for longer protection. <strong>Learn More</strong></label>
+                </div>
+                <div class="checkbox-group" style="margin-top: 16px;">
+                    <div class="checkbox"></div>
+                    <label class="checkbox-label">Add 12 additional months for $175 per Peloton Bike+, 24 total months of coverage</label>
+                </div>
+                <div class="checkbox-group" style="margin-top: 16px;">
+                    <div class="checkbox"></div>
+                    <label class="checkbox-label">Add 27 additional months for $230 per Peloton Bike+, 39 total months of coverage</label>
+                </div>
+
+                <div class="section-title" style="margin-top: 48px;">Shipping</div>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-input" placeholder="First Name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-input" placeholder="Last Name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone</label>
+                            <div class="phone-input">
+                                <div class="country-code">+1</div>
+                                <input type="tel" class="form-input" placeholder="Phone">
                             </div>
                         </div>
-
-                        <!-- Form Fields -->
-                        <form>
-                            <div class="form-group">
-                                <label class="form-label">Full name<span class="required">*</span></label>
-                                <input type="text" class="form-input" placeholder="Enter full name">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Email address<span class="required">*</span></label>
-                                <input type="email" class="form-input" placeholder="Enter email address">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Phone number<span class="required">*</span></label>
-                                <div class="phone-input">
-                                    <div class="country-code">
-                                        🇺🇸
-                                        <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                        </svg>
-                                    </div>
-                                    <input type="tel" class="form-input" placeholder="Enter phone number">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Country<span class="required">*</span></label>
-                                <div class="dropdown">
-                                    <select class="dropdown-select">
-                                        <option>Choose state</option>
-                                        <option>United States</option>
-                                        <option>Canada</option>
-                                        <option>United Kingdom</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label">City</label>
-                                    <input type="text" class="form-input" placeholder="Enter city">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">State</label>
-                                    <input type="text" class="form-input" placeholder="Enter state">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">ZIP Code</label>
-                                    <input type="text" class="form-input" placeholder="Enter ZIP code">
-                                </div>
-                            </div>
-
-                            <div class="checkbox-group">
-                                <div class="checkbox checked"></div>
-                                <label class="checkbox-label">I have read and agree to the Terms and Conditions.</label>
-                            </div>
-                        </form>
                     </div>
 
-                    <!-- Cart Review -->
-                    <div class="cart-review">
-                        <h2 class="cart-title">Review your cart</h2>
+                    <div class="form-group">
+                        <label class="form-label">Address</label>
+                        <input type="text" class="form-input" placeholder="Address">
+                    </div>
 
-                        <!-- Cart Items -->
-                        <div class="cart-item">
-                            <div class="item-image sofa-image"></div>
-                            <div class="item-details">
-                                <div class="item-name">DuoComfort Sofa Premium</div>
-                                <div class="item-quantity">1x</div>
-                            </div>
-                            <div class="item-price">$20.00</div>
+                    <div class="form-group">
+                        <label class="form-label">Apt, Suite</label>
+                        <input type="text" class="form-input" placeholder="Apt, Suite">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">City*</label>
+                            <input type="text" class="form-input" placeholder="City*">
                         </div>
-
-                        <div class="cart-item">
-                            <div class="item-image desk-image"></div>
-                            <div class="item-details">
-                                <div class="item-name">IronOne Desk</div>
-                                <div class="item-quantity">1x</div>
-                            </div>
-                            <div class="item-price">$25.00</div>
-                        </div>
-
-                        <!-- Discount Section -->
-                        <div class="discount-section">
-                            <div class="discount-input">
-                                <svg class="discount-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
-                                </svg>
-                                <input type="text" placeholder="Discount code">
-                            </div>
-                            <button class="apply-btn">Apply</button>
-                        </div>
-
-                        <!-- Order Summary -->
-                        <div class="order-summary">
-                            <div class="summary-row">
-                                <span>Subtotal</span>
-                                <span>$45.00</span>
-                            </div>
-                            <div class="summary-row">
-                                <span>Shipping</span>
-                                <span>$5.00</span>
-                            </div>
-                            <div class="summary-row">
-                                <span>Discount</span>
-                                <span>-$10.00</span>
-                            </div>
-                            <div class="summary-row total">
-                                <span>Total</span>
-                                <span>$40.00</span>
+                        <div class="form-group">
+                            <label class="form-label">State*</label>
+                            <div class="dropdown">
+                                <select class="dropdown-select">
+                                    <option>State*</option>
+                                    <option>California</option>
+                                    <option>New York</option>
+                                    <option>Texas</option>
+                                </select>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="form-label">ZIP Code*</label>
+                            <input type="text" class="form-input" placeholder="ZIP Code*">
+                        </div>
+                    </div>
 
-                        <button class="pay-now-btn">Pay Now</button>
-
-                        <div class="security-info">
-                            <svg class="security-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                            </svg>
-                            <div class="security-content">
-                                <div class="security-title">Secure Checkout - SSL Encrypted</div>
-                                <div class="security-text">Ensuring your financial and personal details are secure during every transaction.</div>
+                    <div class="form-row" style="margin-top: 32px;">
+                        <div class="form-group">
+                            <label class="form-label">Country</label>
+                            <div class="dropdown">
+                                <select class="dropdown-select">
+                                    <option>United States</option>
+                                    <option>Canada</option>
+                                    <option>United Kingdom</option>
+                                </select>
                             </div>
                         </div>
+                        <div class="form-group"></div>
+                        <div class="form-group"></div>
+                    </div>
+
+                    <div class="section-title" style="margin-top: 32px;">Order now, est. delivery by:</div>
+                    <p style="color: #666; font-size: 14px; margin-bottom: 24px;">Enter your ZIP code for an estimate.</p>
+
+                    <div class="checkbox-group">
+                        <div class="checkbox"></div>
+                        <label class="checkbox-label">This order is a gift</label>
+                    </div>
+
+                    <div class="section-title" style="margin-top: 48px;">Payment Method</div>
+                    <div class="form-group">
+                        <div style="padding: 16px; border: 1px solid #e0e0e0; background: #f9f9f9; margin-bottom: 16px;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <strong style="color: #1a1a1a;">Credit Card</strong>
+                                <span style="color: #666;">Secure and encrypted</span>
+                                <div style="margin-left: auto; display: flex; gap: 8px;">
+                                    <img src="data:image/svg+xml,%3Csvg width='32' height='20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='32' height='20' rx='3' fill='%231a1f71'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='8'%3EVISA%3C/text%3E%3C/svg%3E" alt="Visa">
+                                    <img src="data:image/svg+xml,%3Csvg width='32' height='20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='32' height='20' rx='3' fill='%23eb001b'/%3E%3Crect x='12' y='0' width='20' height='20' rx='3' fill='%23f79e1b'/%3E%3C/svg%3E" alt="Mastercard">
+                                    <img src="data:image/svg+xml,%3Csvg width='32' height='20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='32' height='20' rx='3' fill='%23006fcf'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='6'%3EDISCOVER%3C/text%3E%3C/svg%3E" alt="Discover">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div style="padding: 16px; border: 1px solid #e0e0e0; background: white; margin-bottom: 32px;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <strong style="color: #1a1a1a;">Pay Over Time</strong>
+                                <span style="color: #666;">As low as $59/month* for 43 months at 0% APR</span>
+                                <div style="margin-left: auto;">
+                                    <span style="background: #0fa9e6; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;">affirm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Cart Review -->
+            <div class="cart-review">
+                <h2 class="cart-title">Cart Summary</h2>
+
+                <!-- Cart Items -->
+                <div class="cart-item">
+                    <div class="item-image sofa-image"></div>
+                    <div class="item-details">
+                        <div class="item-name">Bike+ Basics Package</div>
+                        <div class="item-quantity">Peloton Bike+</div>
+                        <div class="item-quantity">12-Month Bike+ Limited Warranty</div>
+                    </div>
+                    <div class="item-price">$2,495.00</div>
+                </div>
+
+                <div class="cart-item">
+                    <div class="item-image desk-image"></div>
+                    <div class="item-details">
+                        <div class="item-name">Peloton Membership</div>
+                        <div class="item-quantity">$39/mo membership to unlimited Peloton content. Charges begin upon device activation.</div>
+                    </div>
+                    <div class="item-price">--</div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <div class="summary-row">
+                        <span>Subtotal (2):</span>
+                        <span>$2,495.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Est. delivery and setup</span>
+                        <span>Included</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Estimated Tax</span>
+                        <span>--</span>
+                    </div>
+                    <div class="summary-row">
+                        <span style="color: #0fa9e6;">Enter promo code</span>
+                        <span></span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Estimated Total:</span>
+                        <span>$2,495.00</span>
+                    </div>
+                    <p style="font-size: 12px; color: #999; margin-top: 8px;">As low as $59/month* for 43 months at 0% APR</p>
+                </div>
+
+                <div style="margin: 32px 0 24px; padding: 24px 0; border-top: 1px solid #f0f0f0;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                        <div style="width: 24px; height: 24px; background: #f0f9ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #0fa9e6;">1</div>
+                        <span style="font-size: 14px; color: #1a1a1a;">Try Peloton at home for 100 days.</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                        <div style="width: 24px; height: 24px; background: #f0f9ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #0fa9e6;">2</div>
+                        <span style="font-size: 14px; color: #1a1a1a;">Explore thousands of classes, live and on-demand.</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 24px; height: 24px; background: #f0f9ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #0fa9e6;">3</div>
+                        <span style="font-size: 14px; color: #1a1a1a;">Not for you? We'll refund your entire order.</span>
+                    </div>
+                    <p style="font-size: 12px; color: #999; margin-top: 16px;">Limited time offer. <u>Terms apply</u></p>
+                </div>
+
+                <div class="security-info" style="margin-bottom: 24px;">
+                    <svg class="security-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                    <div class="security-content">
+                        <div class="security-title">Secure Checkout - SSL Encrypted</div>
+                        <div class="security-text">Ensuring your financial and personal details are secure during every transaction.</div>
                     </div>
                 </div>
+
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+                    <span style="font-size: 18px; color: #1a1a1a;">📞 1-866-679-9129</span>
+                    <span style="font-size: 18px; color: #1a1a1a;">💬 START A LIVE CHAT</span>
+                </div>
             </div>
+        </div>
+    </div>
       <!-- </article>
     </main> -->
 
@@ -433,7 +491,7 @@
     </div>
 </div>
 
-
+<button onclick="document.getElementById('profileOverlay').classList.add('active')">Test Overlay</button>
 <!-- Mobile Profile Overlay -->
 <div class="profile-overlay" id="profileOverlay">
     <div class="profile-overlay-backdrop"></div>

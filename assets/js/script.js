@@ -101,52 +101,88 @@ document.addEventListener('DOMContentLoaded', function() {
     // Existing code...
 
     // Cart drawer functionality
-    const cartIcon = document.querySelector('.bottom-nav-item.cart');
+    // Cart drawer functionality - FIXED THE SYNTAX ERROR
+    const cartIcon = document.querySelector('.bottom-nav-item.cart') || 
+                    document.querySelector('[data-nav="cart"]') ||
+                    document.querySelector('#cartIcon');
     const cartDrawer = document.getElementById('cartDrawer');
     const closeCartDrawer = document.getElementById('closeCartDrawer');
     const cartDrawerOverlay = document.querySelector('.cart-drawer-overlay');
 
+    // Debug logging
+    console.log('Cart icon found:', !!cartIcon);
+    console.log('Cart drawer found:', !!cartDrawer);
+    console.log('Cart icon element:', cartIcon);
+
     // Open cart drawer
-    if (cartIcon) {
+    if (cartIcon && cartDrawer) {
         cartIcon.addEventListener('click', function(e) {
             e.preventDefault();
+            console.log('Cart clicked!');
             cartDrawer.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            document.body.style.overflow = 'hidden';
         });
     }
 
-    // Close cart drawer
+    // Close cart drawer function
     function closeDrawer() {
-        cartDrawer.classList.remove('active');
-        document.body.style.overflow = ''; // Restore scrolling
+        if (cartDrawer) {
+            cartDrawer.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     }
 
+    // Close button
     if (closeCartDrawer) {
         closeCartDrawer.addEventListener('click', closeDrawer);
     }
 
+    // Overlay click
     if (cartDrawerOverlay) {
         cartDrawerOverlay.addEventListener('click', closeDrawer);
     }
 
-    // Close on escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && cartDrawer.classList.contains('active')) {
-            closeDrawer();
+    // Quantity controls
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('qty-btn')) {
+            const isPlus = e.target.classList.contains('plus');
+            const quantitySpan = e.target.parentElement.querySelector('span');
+            let quantity = parseInt(quantitySpan.textContent);
+            
+            if (isPlus) {
+                quantity++;
+            } else if (quantity > 1) {
+                quantity--;
+            }
+            
+            quantitySpan.textContent = quantity;
+            
+            // Update total (you can implement this based on your needs)
+            updateCartTotal();
         }
     });
 
-    // Load cart content from cart.html (optional)
-    function loadCartContent() {
-        fetch('cart.html')
-            .then(response => response.text())
-            .then(html => {
-                // Extract cart items from cart.html and populate drawer
-                // This is more complex and depends on your cart.html structure
-            })
-            .catch(error => console.log('Could not load cart content:', error));
+    // Function to update cart total
+    function updateCartTotal() {
+        let total = 0;
+        document.querySelectorAll('.cart-item').forEach(item => {
+            const price = parseFloat(item.querySelector('.cart-item-price').textContent.replace('$', ''));
+            const quantity = parseInt(item.querySelector('.cart-item-quantity span').textContent);
+            total += price * quantity;
+        });
+        
+        const totalElement = document.querySelector('.cart-total span');
+        if (totalElement) {
+            totalElement.textContent = `Total: $${total.toFixed(2)}`;
+        }
     }
 });
+
+// Add this right after cartDrawer.classList.add('active');
+console.log('Active class added:', cartDrawer.classList.contains('active'));
+console.log('Drawer visibility:', window.getComputedStyle(cartDrawer).visibility);
+console.log('Drawer opacity:', window.getComputedStyle(cartDrawer).opacity);
+console.log('Content transform:', window.getComputedStyle(cartDrawer.querySelector('.cart-drawer-content')).transform);
 
 // Add to your existing JavaScript
 document.addEventListener('DOMContentLoaded', function() {
@@ -265,7 +301,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Existing code...
 
     // Profile overlay functionality
-    const profileIcon = document.querySelector('.bottom-nav-item[data-nav="profile"]');
+    const profileIcon = document.querySelector('.bottom-nav-item.profile') || 
+                   document.querySelector('[data-nav="profile"]') ||
+                   document.querySelector('#profileIcon');
     const profileOverlay = document.getElementById('profileOverlay');
     const profileBackdrop = document.querySelector('.profile-overlay-backdrop');
     const closeProfileBtns = document.querySelectorAll('[id^="closeProfile"]');
