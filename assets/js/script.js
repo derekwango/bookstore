@@ -515,3 +515,113 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Cart data
+        let cartItems = [
+            {
+                id: 1,
+                name: "The Silent Patient",
+                price: 24.99,
+                quantity: 1,
+                image: "https://res.cloudinary.com/dpofqivee/image/upload/v1/readable_bookstore/images/products/Atomic_habits_kcoc90"
+            },
+            {
+                id: 2,
+                name: "Atomic Habits",
+                price: 18.99,
+                quantity: 2,
+                image: "https://res.cloudinary.com/dpofqivee/image/upload/v1/readable_bookstore/images/products/Atomic_habits_kcoc90"
+            }
+        ];
+
+        // Open cart
+        function openCart() {
+            document.getElementById('cartDrawer').classList.add('active');
+            renderCartItems();
+        }
+
+        // Close cart
+        function closeCart() {
+            document.getElementById('cartDrawer').classList.remove('active');
+        }
+
+        // Update quantity
+        function updateQuantity(itemId, change) {
+            const item = cartItems.find(item => item.id === itemId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeItem(itemId);
+                } else {
+                    renderCartItems();
+                }
+            }
+        }
+
+        // Remove item
+        function removeItem(itemId) {
+            cartItems = cartItems.filter(item => item.id !== itemId);
+            renderCartItems();
+        }
+
+        // Calculate total
+        function calculateTotal() {
+            return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+        }
+
+        // Render cart items
+        function renderCartItems() {
+            const cartBody = document.getElementById('cartBody');
+            const totalAmount = document.getElementById('totalAmount');
+            
+            if (cartItems.length === 0) {
+                cartBody.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">🛒</div>
+                        <p>Your cart is empty</p>
+                    </div>
+                `;
+                totalAmount.textContent = '$0.00';
+                return;
+            }
+
+            cartBody.innerHTML = cartItems.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h4>${item.name}</h4>
+                        <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+                        <div class="cart-item-quantity">
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">−</button>
+                            <span class="quantity-display">${item.quantity}</span>
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            <button class="remove-item" onclick="removeItem(${item.id})" title="Remove item">🗑</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Update total
+            const total = calculateTotal();
+            totalAmount.textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Initialize cart on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCartItems();
+        });
+
+        // Close cart when clicking outside
+        document.addEventListener('click', function(e) {
+            const cartDrawer = document.getElementById('cartDrawer');
+            if (e.target === cartDrawer) {
+                closeCart();
+            }
+        });
+
+        // Close cart with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeCart();
+            }
+        });
