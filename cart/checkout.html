@@ -395,39 +395,27 @@
 
     <!-- Mobile Cart Drawer -->
 <div class="cart-drawer" id="cartDrawer">
-    <div class="cart-drawer-overlay"></div>
-    <div class="cart-drawer-content">
-        <div class="cart-drawer-header">
-            <h3>Shopping Cart</h3>
-            <button class="cart-drawer-close" id="closeCartDrawer">
-                <ion-icon name="close-outline"></ion-icon>
-            </button>
-        </div>
-        <div class="cart-drawer-body">
-            <!-- This will be loaded from cart.html or populated dynamically -->
-            <div class="cart-item">
-                <img src="https://res.cloudinary.com/dpofqivee/image/upload/v1/readable_bookstore/images/products/Atomic_habits_kcoc90" alt="Product" class="cart-item-image">
-                <div class="cart-item-details">
-                    <h4>DuoComfort Sofa Premium</h4>
-                    <p class="cart-item-price">$20.00</p>
-                    <div class="cart-item-quantity">
-                        <button class="qty-btn minus">-</button>
-                        <span>1</span>
-                        <button class="qty-btn plus">+</button>
-                    </div>
+        <div class="cart-drawer-overlay" onclick="closeCart()"></div>
+        <div class="cart-drawer-content">
+            <div class="cart-drawer-header">
+                <h3>Cart</h3>
+                <button class="cart-drawer-close" onclick="closeCart()">
+                    ×
+                </button>
+            </div>
+            <div class="cart-drawer-body" id="cartBody">
+                <!-- Cart items will be populated here -->
+            </div>
+            <div class="cart-drawer-footer">
+                <div class="cart-total">
+                    <span class="total-label">Total</span>
+                    <span class="total-amount" id="totalAmount">$0.00</span>
                 </div>
+                <button class="checkout-btn">Checkout</button>
+                <a href="#" class="view-cart-btn">View full cart</a>
             </div>
-            <!-- Add more cart items here -->
-        </div>
-        <div class="cart-drawer-footer">
-            <div class="cart-total">
-                <span>Total: $45.00</span>
-            </div>
-            <button class="checkout-btn">Proceed to Checkout</button>
-            <a href="cart.html" class="view-cart-btn">View Full Cart</a>
         </div>
     </div>
-</div>
 
 <!-- Mobile Search Overlay -->
 <div class="search-overlay" id="searchOverlay">
