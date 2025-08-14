@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Urbanmuse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            gap: 40px;
+        }
+
+        .sidebar {
+            flex: 0 0 280px;
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            height: fit-content;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .user-greeting {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .user-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 32px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-item {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #666;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-link:hover {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .sidebar-link.active {
+            background-color: #333;
+            color: white;
+        }
+
+        .sidebar-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            opacity: 0.7;
+        }
+
+        .logout-link {
+            color: #e74c3c !important;
+            margin-top: 16px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 16px;
+        }
+
+        .main-content {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 32px;
+        }
+
+        .order-tabs {
+            display: flex;
+            /* border-bottom: 1px solid #f0f0f0; */
+            margin-bottom: 32px;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            border: none;
+            background: none;
+            color: #666;
+            font-size: 14px;
+            cursor: pointer;
+            position: relative;
+            border-radius: 6px 6px;
+            margin-right: 8px;
+        }
+
+        .tab.active {
+            background-color: #333;
+            color: white;
+        }
+
+        .tab-badge {
+            background-color: #333;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 8px;
+            font-size: 12px;
+            margin-left: 8px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .tab.active .tab-badge {
+            background-color: white;
+            color: #333;
+        }
+
+        .order-card {
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: all 0.2s ease;
+        }
+
+        .order-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .order-id {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .delivery-status {
+            background-color: #fff3e0;
+            color: #f57c00;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .shipping-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .shipping-from, .shipping-to {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .shipping-progress {
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+            margin: 0 20px;
+        }
+
+        .progress-line {
+            height: 2px;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #333;
+            width: 60%;
+        }
+
+        .progress-dots {
+            position: absolute;
+            top: -4px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .progress-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+        }
+
+        .progress-dot.active {
+            background-color: #333;
+        }
+
+        .estimated-date {
+            color: #666;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .order-items {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .item {
+            display: flex;
+            gap: 16px;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            background-color: #f8f9fa;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .item-price {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .item-size {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .order-total {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .details-btn {
+            padding: 8px 16px;
+            background: none;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            color: #666;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .details-btn:hover {
+            border-color: #333;
+            color: #333;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                padding: 20px 16px;
+                gap: 24px;
+            }
+            
+            .sidebar {
+                flex: none;
+                width: 100%;
+            }
+            
+            .main-content {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .shipping-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .shipping-progress {
+                margin: 16px 0;
+                min-width: 100%;
+            }
+            
+            .order-items {
+                flex-direction: column;
+            }
+            
+            .item {
+                min-width: 100%;
+            }
+            
+            .order-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 16px 12px;
+            }
+            
+            .main-content {
+                padding: 20px 16px;
+            }
+            
+            .order-card {
+                padding: 20px 16px;
+            }
+            
+            .tab {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="user-greeting">Good Morning</div>
+            <div class="user-name">George Gika</div>
+            
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"/>
+                        </svg>
+                        Profile
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
+                        </svg>
+                        Wishlist
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link active">
+                        <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zM8 7a1 1 0 012 0v4l2-2a1 1 0 011.414 1.414L10.414 13.5a1 1 0 01-1.414 0L6 10.414A1 1 0 117.414 9L9 10.586V7a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                        My Order
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                        </svg>
+                        Saved Address
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                        </svg>
+                        Change Password
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link logout-link">
+                        <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+                        </svg>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1 class="page-title">My Orders</h1>
+            
+            <!-- Order Tabs -->
+            <div class="order-tabs">
+                <button class="tab active">
+                    On Shipping
+                    <span class="tab-badge">3</span>
+                </button>
+                <button class="tab">
+                    Arrived
+                    <span class="tab-badge">2</span>
+                </button>
+                <button class="tab">Canceled</button>
+            </div>
+
+            <!-- Order 1 -->
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-id">CTH-89765</div>
+                    <div class="delivery-status">On Deliver</div>
+                </div>
+                
+                <div class="shipping-info">
+                    <div class="shipping-from">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                        </svg>
+                        Illinois, United States
+                    </div>
+                    
+                    <div class="shipping-progress">
+                        <div class="progress-line">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <div class="progress-dots">
+                            <div class="progress-dot active"></div>
+                            <div class="progress-dot active"></div>
+                            <div class="progress-dot"></div>
+                            <div class="progress-dot"></div>
+                        </div>
+                        <div class="estimated-date">Estimated arrival: 28 May 2024</div>
+                    </div>
+                    
+                    <div class="shipping-to">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                        </svg>
+                        George's House, Indonesia
+                    </div>
+                </div>
+                
+                <div class="order-items">
+                    <div class="item">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23e8f5e8'/%3E%3Cpath d='M20 60h40l-5-35H25z' fill='%23a8d5a8'/%3E%3Cpath d='M30 25h20v10H30z' fill='%236b9b6b'/%3E%3C/svg%3E" alt="Japan Green Outer" class="item-image">
+                        <div class="item-details">
+                            <div class="item-name">Japan Green Outer</div>
+                            <div class="item-price">Rp 399.000</div>
+                            <div class="item-size">M</div>
+                        </div>
+                    </div>
+                    
+                    <div class="item">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23f0f0f0'/%3E%3Cpath d='M25 20h30v45H25z' fill='%23e0e0e0'/%3E%3Cpath d='M30 25h20v8H30z' fill='%23d0d0d0'/%3E%3C/svg%3E" alt="White off jacket 2024" class="item-image">
+                        <div class="item-details">
+                            <div class="item-name">White off jacket 2024</div>
+                            <div class="item-price">Rp 450.000</div>
+                            <div class="item-size">M</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-footer">
+                    <div class="order-total">Total: Rp 849.000</div>
+                    <button class="details-btn">Details</button>
+                </div>
+            </div>
+
+            <!-- Order 2 -->
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-id">CTH-45672</div>
+                    <div class="delivery-status">On Deliver</div>
+                </div>
+                
+                <div class="shipping-info">
+                    <div class="shipping-from">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                        </svg>
+                        Illinois, United States
+                    </div>
+                    
+                    <div class="shipping-progress">
+                        <div class="progress-line">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <div class="progress-dots">
+                            <div class="progress-dot active"></div>
+                            <div class="progress-dot active"></div>
+                            <div class="progress-dot"></div>
+                            <div class="progress-dot"></div>
+                        </div>
+                        <div class="estimated-date">Estimated arrival: 28 May 2024</div>
+                    </div>
+                    
+                    <div class="shipping-to">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                        </svg>
+                        George's House, Indonesia
+                    </div>
+                </div>
+                
+                <div class="order-items">
+                    <div class="item">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23e8f5e8'/%3E%3Cpath d='M25 15h30v50H25z' fill='%23a8d5a8'/%3E%3Cpath d='M35 25h10v35H35z' fill='%236b9b6b'/%3E%3Ccircle cx='40' cy='20' r='8' fill='%23556b55'/%3E%3C/svg%3E" alt="Soft Hoodie" class="item-image">
+                        <div class="item-details">
+                            <div class="item-name">Soft Hoodie</div>
+                            <div class="item-price">Rp 250.000</div>
+                            <div class="item-size">L</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-footer">
+                    <div class="order-total">Total: Rp 300.000</div>
+                    <button class="details-btn">Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Details button functionality
+        document.querySelectorAll('.details-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Order details would be shown here');
+            });
+        });
+
+        // Sidebar link functionality
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (!this.classList.contains('logout-link')) {
+                    e.preventDefault();
+                    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
